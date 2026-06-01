@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Timeline of Civilization</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Source+Sans+Pro:wght@300;400;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0d;
+  --bg2: #111111;
+  --bg3: #161616;
+  --card: #1a1a1a;
+  --card2: #1f1f1f;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --gold3: #a07830;
+  --white: #f0ede8;
+  --gray: #8a8a8a;
+  --gray2: #555;
+  --accent-blue: #4a9eff;
+  --accent-teal: #2dd4bf;
+  --accent-red: #e84545;
+  --accent-purple: #8b5cf6;
+  --accent-orange: #f97316;
+  --accent-green: #22c55e;
+  --timeline-line: #c9a84c;
+  --font-head: 'Cinzel', serif;
+  --font-body: 'Source Sans Pro', sans-serif;
+  --font-label: 'Montserrat', sans-serif;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--gold3); border-radius: 3px; }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(13,13,13,0.96);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  backdrop-filter: blur(12px);
+  padding: 0 2rem;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-brand {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex; gap: 0.2rem; align-items: center;
+  list-style: none; flex-wrap: wrap;
+}
+.nav-links a {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gray);
+  text-decoration: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 3px;
+  transition: var(--transition);
+}
+.nav-links a:hover { color: var(--gold); background: rgba(201,168,76,0.08); }
+.nav-search {
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.search-input {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  color: var(--white);
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  width: 180px;
+  outline: none;
+  transition: var(--transition);
+}
+.search-input:focus { border-color: var(--gold); width: 220px; }
+.search-input::placeholder { color: var(--gray2); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 2rem 4rem;
+  text-align: center;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.06) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(74,158,255,0.04) 0%, transparent 60%),
+              radial-gradient(ellipse 30% 30% at 80% 20%, rgba(139,92,246,0.04) 0%, transparent 60%);
+}
+.hero-stars {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 10%, rgba(255,255,255,0.25) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 80% 60%, rgba(201,168,76,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.15) 0%, transparent 100%);
+}
+.hero-line {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(201,168,76,0.4) 30%, rgba(201,168,76,0.6) 50%, rgba(201,168,76,0.4) 70%, transparent 100%);
+  transform: translateX(-50%);
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-eyebrow {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s ease both;
+}
+.hero h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  animation: fadeUp 1s ease 0.15s both;
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub {
+  font-size: 1.1rem;
+  color: var(--gray);
+  max-width: 560px;
+  margin: 0 auto 3rem;
+  line-height: 1.7;
+  animation: fadeUp 1s ease 0.3s both;
+}
+.hero-stats {
+  display: flex; gap: 3rem; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 1s ease 0.45s both;
+  margin-bottom: 3rem;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+  font-family: var(--font-head);
+  font-size: 2rem;
+  color: var(--gold);
+  display: block;
+}
+.hero-stat-label {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.hero-cta {
+  display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  animation: fadeUp 1s ease 0.6s both;
+}
+.btn {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.9rem 2rem;
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-gold {
+  background: var(--gold);
+  color: #0d0d0d;
+}
+.btn-gold:hover { background: var(--gold2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.3); }
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.5);
+}
+.btn-outline:hover { border-color: var(--gold); background: rgba(201,168,76,0.08); transform: translateY(-2px); }
+.scroll-indicator {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  animation: fadeUp 1s ease 0.9s both;
+}
+.scroll-indicator span {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray2);
+}
+.scroll-arrow {
+  width: 20px; height: 20px;
+  border-right: 1px solid var(--gold3);
+  border-bottom: 1px solid var(--gold3);
+  transform: rotate(45deg);
+  animation: bounce 2s infinite;
+}
+
+/* ===== SECTIONS ===== */
+section { padding: 5rem 0; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.section-label {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.section-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.section-sub {
+  color: var(--gray);
+  font-size: 1rem;
+  max-width: 600px;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+.gold-line {
+  width: 60px; height: 2px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin-bottom: 2rem;
+}
+
+/* ===== TIMELINE ===== */
+#timeline { background: var(--bg2); }
+.timeline-controls {
+  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--card);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: 6px;
+}
+.filter-group { display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+.filter-label {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-right: 0.25rem;
+}
+.filter-btn {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  border-radius: 2px;
+  border: 1px solid var(--gray2);
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.filter-btn:hover, .filter-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.1);
+}
+.timeline-zoom {
+  display: flex; gap: 0.5rem; align-items: center; margin-left: auto;
+}
+.zoom-btn {
+  width: 32px; height: 32px;
+  border-radius: 3px;
+  border: 1px solid var(--gray2);
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.zoom-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.timeline-wrapper {
+  position: relative;
+  padding: 2rem 0;
+}
+.timeline-axis {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 2px;
+  background: linear-gradient(to bottom, transparent 0%, var(--gold3) 5%, var(--gold) 50%, var(--gold3) 95%, transparent 100%);
+  transform: translateX(-50%);
+}
+.timeline-items { list-style: none; }
+.timeline-item {
+  display: flex;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  position: relative;
+}
+.timeline-item.visible { opacity: 1; transform: translateY(0); }
+.timeline-item:nth-child(odd) { flex-direction: row-reverse; }
+.timeline-item:nth-child(even) { flex-direction: row; }
+
+.timeline-content {
+  width: calc(50% - 2.5rem);
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+.timeline-content:hover {
+  border-color: rgba(201,168,76,0.4);
+  background: var(--card2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+.timeline-item:nth-child(odd) .timeline-content { margin-right: 2.5rem; text-align: right; }
+.timeline-item:nth-child(even) .timeline-content { margin-left: 2.5rem; }
+
+.timeline-date {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+}
+.timeline-title {
+  font-family: var(--font-head);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.timeline-desc {
+  font-size: 0.82rem;
+  color: var(--gray);
+  line-height: 1.5;
+}
+.timeline-tag {
+  display: inline-block;
+  font-family: var(--font-label);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  margin-top: 0.6rem;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  background: var(--bg);
+  transform: translateX(-50%) translateY(1.4rem);
+  z-index: 2;
+  transition: var(--transition);
+}
+.timeline-item:hover .timeline-dot {
+  background: var(--gold);
+  box-shadow: 0 0 12px rgba(201,168,76,0.5);
+}
+
+/* Era separators */
+.era-marker {
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem 0;
+  position: relative; z-index: 3;
+}
+.era-label-inner {
+  background: var(--bg2);
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: 100px;
+  padding: 0.5rem 1.5rem;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ===== DISCOVERY HIGHLIGHT ===== */
+.discovery-highlight {
+  background: linear-gradient(135deg, rgba(201,168,76,0.05) 0%, rgba(74,158,255,0.04) 100%);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  display: flex; gap: 2rem; align-items: flex-start;
+}
+.discovery-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+.discovery-text h3 {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.discovery-text p { color: var(--gray); font-size: 0.9rem; line-height: 1.7; }
+
+/* ===== WHAT ELSE WAS HAPPENING ===== */
+#what-else { background: var(--bg3); }
+.wewh-hero {
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+  background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(74,158,255,0.04) 100%);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+.wewh-title {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+.wewh-sub { color: var(--gray); max-width: 540px; margin: 0 auto 2rem; font-size: 0.95rem; }
+
+.date-selector {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+  margin-bottom: 1rem;
+}
+.date-btn {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1.1rem;
+  border-radius: 3px;
+  border: 1px solid rgba(201,168,76,0.3);
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.date-btn:hover, .date-btn.active {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: rgba(201,168,76,0.1);
+}
+
+.wewh-display {
+  display: none;
+}
+.wewh-display.active { display: block; animation: fadeUp 0.5s ease; }
+.wewh-period-title {
+  font-family: var(--font-head);
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.wewh-period-sub {
+  color: var(--gray);
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+.wewh-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.wewh-region {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  padding: 1.2rem;
+  transition: var(--transition);
+}
+.wewh-region:hover {
+  border-color: rgba(201,168,76,0.3);
+  transform: translateY(-2px);
+}
+.wewh-region-name {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.wewh-region-event { font-size: 0.85rem; color: var(--gray); line-height: 1.5; }
+
+/* ===== FIRST TEMPLES ===== */
+#first-temples { background: var(--bg); }
+.temples-hero {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 3rem;
+  min-height: 340px;
+  display: flex; align-items: flex-end;
+  background: linear-gradient(135deg, #0a0a0a 0%, #141410 50%, #0d0d0a 100%);
+  border: 1px solid rgba(201,168,76,0.15);
+}
+.temples-hero-content {
+  padding: 3rem;
+  position: relative; z-index: 2;
+  max-width: 600px;
+}
+.temples-hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse 30% 30% at 20% 20%, rgba(74,158,255,0.05) 0%, transparent 60%);
+}
+.img-placeholder {
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(201,168,76,0.2);
+  border-radius: 6px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.75rem;
+  min-height: 200px;
+  padding: 2rem;
+  text-align: center;
+  color: var(--gray2);
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+.img-placeholder-icon { font-size: 2rem; }
+.img-placeholder p { color: var(--gray); font-size: 0.78rem; line-height: 1.5; max-width: 300px; }
+
+.site-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
+.site-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.site-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.site-card-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer;
+}
+.site-card-title { font-family: var(--font-head); font-size: 1.05rem; }
+.site-card-date {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  color: var(--gold);
+  letter-spacing: 0.15em;
+}
+.expand-icon { color: var(--gold); font-size: 1.2rem; transition: var(--transition); }
+.site-card.open .expand-icon { transform: rotate(180deg); }
+.site-card-body {
+  padding: 0 1.5rem;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.site-card.open .site-card-body { max-height: 600px; padding: 1.25rem 1.5rem; }
+.site-card-body p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; margin-bottom: 0.75rem; }
+.site-fact {
+  display: flex; gap: 0.5rem; align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.site-fact-label {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  min-width: 80px;
+  margin-top: 0.15rem;
+}
+.site-fact-val { font-size: 0.85rem; color: var(--gray); }
+
+/* ===== GREAT DEBATE ===== */
+#great-debate { background: var(--bg2); }
+.debate-models {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin: 3rem 0;
+}
+.debate-model {
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid;
+  transition: var(--transition);
+}
+.debate-model.traditional {
+  background: rgba(74,158,255,0.04);
+  border-color: rgba(74,158,255,0.2);
+}
+.debate-model.alternative {
+  background: rgba(201,168,76,0.04);
+  border-color: rgba(201,168,76,0.2);
+}
+.debate-model h3 {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+.debate-model.traditional h3 { color: var(--accent-blue); }
+.debate-model.alternative h3 { color: var(--gold); }
+.model-flow {
+  display: flex; flex-direction: column; gap: 0.75rem;
+}
+.model-step {
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.model-step-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.traditional .model-step-num { background: rgba(74,158,255,0.15); color: var(--accent-blue); }
+.alternative .model-step-num { background: rgba(201,168,76,0.15); color: var(--gold); }
+.model-step-text { font-size: 0.88rem; }
+.model-arrow { text-align: center; color: var(--gray2); font-size: 0.8rem; }
+
+.debate-note {
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 6px 6px 0;
+  padding: 1.25rem 1.5rem;
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ===== MY VISIT ===== */
+#my-visit { background: var(--bg); }
+.visit-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.2);
+}
+.video-wrapper iframe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  border: none;
+}
+.visit-text h2 { font-family: var(--font-head); font-size: 1.6rem; margin-bottom: 1rem; }
+.visit-text .visit-caption {
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.visit-text p { color: var(--gray); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1rem; }
+.visit-highlights { margin-top: 1.5rem; }
+.visit-highlight {
+  display: flex; gap: 1rem; align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.visit-highlight:last-child { border-bottom: none; }
+.vh-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+.vh-text { font-size: 0.85rem; color: var(--gray); line-height: 1.5; }
+.vh-text strong { color: var(--white); font-weight: 600; display: block; margin-bottom: 0.2rem; }
+
+/* ===== CIVILIZATIONS ===== */
+#civilizations { background: var(--bg3); }
+.civ-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.5rem; }
+.civ-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.civ-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  transition: var(--transition);
+}
+.civ-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.civ-card:hover::before { width: 3px; }
+.civ-era {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-bottom: 0.5rem;
+}
+.civ-name { font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 0.75rem; }
+.civ-dates { font-family: var(--font-label); font-size: 0.7rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.civ-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
+.civ-region {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ===== FIGURES ===== */
+#figures { background: var(--bg2); }
+.figures-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.figure-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.figure-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.figure-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+}
+.figure-avatar {
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  border: 2px solid var(--gold3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+  margin-bottom: 0.75rem;
+}
+.figure-name { font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 0.25rem; }
+.figure-dates { font-family: var(--font-label); font-size: 0.65rem; color: var(--gold); letter-spacing: 0.15em; }
+.figure-body { padding: 1.25rem 1.5rem; }
+.figure-bio { font-size: 0.83rem; color: var(--gray); line-height: 1.65; margin-bottom: 1rem; }
+.figure-achievements { list-style: none; }
+.figure-achievements li {
+  font-size: 0.82rem;
+  color: var(--gray);
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  padding-left: 1rem;
+  position: relative;
+}
+.figure-achievements li::before {
+  content: '▸';
+  color: var(--gold);
+  position: absolute; left: 0;
+  font-size: 0.7rem;
+}
+.figure-legacy {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(201,168,76,0.06);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: var(--gray);
+  line-height: 1.55;
+  font-style: italic;
+  border-left: 2px solid var(--gold3);
+}
+
+/* ===== BATTLES ===== */
+#battles { background: var(--bg); }
+.battles-table-wrap { overflow-x: auto; }
+table.battles-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+.battles-table th {
+  font-family: var(--font-label);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(201,168,76,0.3);
+  white-space: nowrap;
+}
+.battles-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  color: var(--gray);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.battles-table tr:hover td { background: rgba(255,255,255,0.02); color: var(--white); }
+.battles-table td:first-child { color: var(--white); font-weight: 600; }
+.battles-table td.date-col { color: var(--gold); font-family: var(--font-label); font-size: 0.72rem; letter-spacing: 0.1em; white-space: nowrap; }
+.outcome-badge {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+/* ===== ANCIENT AMERICAS ===== */
+#americas { background: var(--bg2); }
+.americas-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
+.americas-text h3 { font-family: var(--font-head); font-size: 1.3rem; margin-bottom: 0.75rem; color: var(--gold); }
+.americas-text p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; margin-bottom: 1rem; }
+.lidar-box {
+  background: linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(74,158,255,0.04) 100%);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+.lidar-box h4 {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--accent-green);
+  margin-bottom: 1rem;
+}
+.discovery-list { list-style: none; }
+.discovery-list li {
+  font-size: 0.85rem;
+  color: var(--gray);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex; gap: 0.75rem; align-items: flex-start;
+}
+.discovery-list li::before { content: '◆'; color: var(--accent-green); font-size: 0.55rem; margin-top: 0.35rem; flex-shrink: 0; }
+
+/* ===== DISCOVERIES CHANGING HISTORY ===== */
+#discoveries { background: var(--bg3); }
+.discovery-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.discovery-card {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: var(--transition);
+  position: relative;
+}
+.discovery-card:hover { border-color: rgba(45,212,191,0.3); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.dc-year {
+  font-family: var(--font-label);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--accent-teal);
+  margin-bottom: 0.5rem;
+}
+.dc-title { font-family: var(--font-head); font-size: 1rem; margin-bottom: 0.75rem; }
+.dc-what { font-size: 0.85rem; color: var(--gray); line-height: 1.6; margin-bottom: 0.75rem; }
+.dc-impact {
+  padding: 0.75rem 1rem;
+  background: rgba(45,212,191,0.05);
+  border-radius: 4px;
+  border-left: 2px solid var(--accent-teal);
+  font-size: 0.8rem;
+  color: var(--gray);
+  line-height: 1.55;
+}
+.dc-impact-label {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-teal);
+  margin-bottom: 0.3rem;
+}
+
+/* ===== NORTH AMERICA ===== */
+#north-america { background: var(--bg2); }
+.na-sites { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+.na-site {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.na-site:hover { border-color: rgba(249,115,22,0.3); transform: translateY(-3px); }
+.na-site-img { margin: 0; }
+.na-site-body { padding: 1.25rem; }
+.na-site-name { font-family: var(--font-head); font-size: 1rem; margin-bottom: 0.4rem; }
+.na-site-loc { font-family: var(--font-label); font-size: 0.65rem; color: var(--accent-orange); letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+.na-site-desc { font-size: 0.83rem; color: var(--gray); line-height: 1.6; }
+
+/* ===== MAPS ===== */
+#maps { background: var(--bg); }
+.maps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+.map-placeholder {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.map-placeholder:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); }
+.map-ph-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.map-ph-title { font-family: var(--font-head); font-size: 0.95rem; margin-bottom: 0.2rem; }
+.map-ph-sub { font-family: var(--font-label); font-size: 0.62rem; color: var(--gray); letter-spacing: 0.1em; }
+.map-ph-visual {
+  min-height: 160px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255,255,255,0.02);
+  color: var(--gray2);
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-align: center;
+  padding: 1rem;
+  flex-direction: column; gap: 0.5rem;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg2);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding: 3rem 0;
+  text-align: center;
+}
+.footer-logo {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+  margin-bottom: 1rem;
+}
+.footer-sub {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  color: var(--gray2);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+.footer-links {
+  display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+  list-style: none; margin-bottom: 2rem;
+}
+.footer-links a {
+  font-family: var(--font-label);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--gray);
+  text-decoration: none;
+  transition: var(--transition);
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-copy {
+  font-size: 0.75rem;
+  color: var(--gray2);
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.85);
+  display: none; align-items: center; justify-content: center;
+  padding: 2rem;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; animation: fadeIn 0.25s ease; }
+.modal {
+  background: var(--card);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 10px;
+  padding: 2.5rem;
+  max-width: 700px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  background: transparent; border: none;
+  color: var(--gray); font-size: 1.3rem;
+  cursor: pointer; transition: var(--transition);
+  width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+}
+.modal-close:hover { color: var(--gold); background: rgba(255,255,255,0.05); }
+.modal-date { font-family: var(--font-label); font-size: 0.65rem; color: var(--gold); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.modal-title { font-family: var(--font-head); font-size: 1.5rem; margin-bottom: 1rem; }
+.modal-content p { font-size: 0.9rem; color: var(--gray); line-height: 1.75; margin-bottom: 1rem; }
+.modal-content h4 { font-family: var(--font-head); font-size: 0.95rem; color: var(--gold); margin: 1.25rem 0 0.5rem; }
+.modal-content ul { list-style: none; margin-bottom: 1rem; }
+.modal-content ul li { font-size: 0.88rem; color: var(--gray); padding: 0.3rem 0 0.3rem 1rem; position: relative; }
+.modal-content ul li::before { content: '▸'; color: var(--gold); position: absolute; left: 0; }
+
+/* ===== SEARCH RESULTS ===== */
+.search-results-bar {
+  position: fixed;
+  top: 64px; left: 0; right: 0; z-index: 999;
+  background: var(--card);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  padding: 0.75rem 2rem;
+  display: none;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.search-results-bar.open { display: flex; }
+.search-result-item {
+  font-family: var(--font-label);
+  font-size: 0.72rem;
+  color: var(--gray);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 3px;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.search-result-item:hover { border-color: var(--gold); color: var(--gold); }
+.search-close {
+  margin-left: auto;
+  background: none; border: none;
+  color: var(--gray); cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ===== HIGHLIGHT BANNER ===== */
+.highlight-banner {
+  background: linear-gradient(135deg, rgba(45,212,191,0.08) 0%, rgba(74,158,255,0.06) 100%);
+  border: 1px solid rgba(45,212,191,0.2);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  display: flex; gap: 1.5rem; align-items: center;
+}
+.hb-icon { font-size: 2rem; }
+.hb-text h4 { font-family: var(--font-head); font-size: 1rem; color: var(--accent-teal); margin-bottom: 0.25rem; }
+.hb-text p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes bounce {
+  0%, 100% { transform: rotate(45deg) translateY(0); }
+  50% { transform: rotate(45deg) translateY(6px); }
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(201,168,76,0); }
+}
+
+/* ===== COLORS FOR TAGS ===== */
+.tag-origins { background: rgba(139,92,246,0.15); color: #a78bfa; border: 1px solid rgba(139,92,246,0.3); }
+.tag-ancient { background: rgba(201,168,76,0.12); color: var(--gold); border: 1px solid rgba(201,168,76,0.3); }
+.tag-battle { background: rgba(232,69,69,0.12); color: #f87171; border: 1px solid rgba(232,69,69,0.3); }
+.tag-discovery { background: rgba(45,212,191,0.12); color: var(--accent-teal); border: 1px solid rgba(45,212,191,0.3); }
+.tag-religion { background: rgba(249,115,22,0.12); color: #fb923c; border: 1px solid rgba(249,115,22,0.3); }
+.tag-medieval { background: rgba(74,158,255,0.12); color: #60a5fa; border: 1px solid rgba(74,158,255,0.3); }
+.tag-modern { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .timeline-axis { display: none; }
+  .timeline-item, .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+    flex-direction: column;
+  }
+  .timeline-content,
+  .timeline-item:nth-child(odd) .timeline-content,
+  .timeline-item:nth-child(even) .timeline-content {
+    width: 100%; margin: 0; text-align: left;
+    padding-left: 2.5rem;
+  }
+  .timeline-dot { left: 0; transform: translateY(1.4rem); }
+  .debate-models { grid-template-columns: 1fr; }
+  .americas-grid { grid-template-columns: 1fr; }
+  .visit-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .hero-stats { gap: 1.5rem; }
+  .hero h1 { font-size: 2rem; }
+  .section-title { font-size: 1.6rem; }
+  .modal { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">THE TIMELINE OF CIVILIZATION</a>
+  <ul class="nav-links">
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#what-else">What Else?</a></li>
+    <li><a href="#first-temples">First Temples</a></li>
+    <li><a href="#great-debate">Great Debate</a></li>
+    <li><a href="#my-visit">My Visit</a></li>
+    <li><a href="#civilizations">Civilizations</a></li>
+    <li><a href="#figures">Figures</a></li>
+    <li><a href="#battles">Battles</a></li>
+    <li><a href="#americas">Americas</a></li>
+    <li><a href="#discoveries">Discoveries</a></li>
+  </ul>
+  <div class="nav-search">
+    <input type="text" class="search-input" id="searchInput" placeholder="Search history…">
+  </div>
+</nav>
+
+<!-- SEARCH RESULTS BAR -->
+<div class="search-results-bar" id="searchBar">
+  <span id="searchResultsContent"></span>
+  <button class="search-close" id="searchClose">✕</button>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-stars"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">A Museum-Quality Historical Experience</div>
+    <h1>The Timeline of<br><span>Civilization</span></h1>
+    <p class="hero-sub">From our earliest ancestors 300,000 years ago to the archaeological breakthroughs reshaping our understanding today — history is not finished.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-num">300K</span><span class="hero-stat-label">Years of History</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">28+</span><span class="hero-stat-label">Major Battles</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">16+</span><span class="hero-stat-label">Civilizations</span></div>
+      <div class="hero-stat"><span class="hero-stat-num">12+</span><span class="hero-stat-label">Major Discoveries</span></div>
+    </div>
+    <div class="hero-cta">
+      <a href="#timeline" class="btn btn-gold">Explore the Timeline →</a>
+      <a href="#first-temples" class="btn btn-outline">First Temples</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll to Begin</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+<div class="container">
+  <div class="section-label">Master Timeline</div>
+  <h2 class="section-title">300,000 Years of Human History</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">From our earliest ancestors in Africa to the present day. Each node represents a pivotal moment in the human story.</p>
+
+  <div class="discovery-highlight">
+    <div class="discovery-icon">🔬</div>
+    <div class="discovery-text">
+      <h3>History Is Not Finished</h3>
+      <p>Major archaeological discoveries continue to reshape our understanding of human civilization. LiDAR technology, ancient DNA analysis, and deep-sea archaeology are revealing civilizations and migrations we never knew existed. The timeline you see below is being rewritten in real time.</p>
+    </div>
+  </div>
+
+  <div class="timeline-controls">
+    <div class="filter-group">
+      <span class="filter-label">Era:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="origins">Origins</button>
+      <button class="filter-btn" data-filter="ancient">Ancient</button>
+      <button class="filter-btn" data-filter="battle">Battles</button>
+      <button class="filter-btn" data-filter="discovery">Discovery</button>
+      <button class="filter-btn" data-filter="medieval">Medieval</button>
+      <button class="filter-btn" data-filter="modern">Modern</button>
+    </div>
+    <div class="timeline-zoom">
+      <span class="filter-label">Zoom:</span>
+      <button class="zoom-btn" id="zoomOut">−</button>
+      <button class="zoom-btn" id="zoomIn">+</button>
+    </div>
+  </div>
+
+  <div class="timeline-wrapper" id="timelineWrapper">
+    <div class="timeline-axis"></div>
+    <ul class="timeline-items" id="timelineItems">
+
+      <li class="era-marker"><div class="era-label-inner">◆ Human Origins · 300,000 – 50,000 BCE ◆</div></li>
+
+      <li class="timeline-item" data-cat="origins" data-modal="sapiens">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~300,000 BCE</div>
+          <div class="timeline-title">Earliest Homo Sapiens</div>
+          <div class="timeline-desc">Fossil remains at Jebel Irhoud, Morocco push back the emergence of anatomically modern humans. We are older than we thought.</div>
+          <span class="timeline-tag tag-origins">Human Origins</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="origins">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~250,000 BCE</div>
+          <div class="timeline-title">Neanderthals in Europe</div>
+          <div class="timeline-desc">Homo neanderthalensis flourishes across Europe and western Asia. Evidence of burials, tool use, and interbreeding with Homo sapiens.</div>
+          <span class="timeline-tag tag-origins">Human Origins</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="origins">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~300,000 – 50,000 BCE</div>
+          <div class="timeline-title">Denisovans — The Hidden Humans</div>
+          <div class="timeline-desc">Known almost entirely from DNA, Denisovans ranged across Asia. Their genes persist in modern Melanesian and Southeast Asian populations.</div>
+          <span class="timeline-tag tag-discovery">Discovery</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="origins">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~70,000 BCE</div>
+          <div class="timeline-title">Out of Africa Migration</div>
+          <div class="timeline-desc">Small groups of Homo sapiens leave Africa, eventually colonizing every habitable continent. The founding migration of all non-African populations.</div>
+          <span class="timeline-tag tag-origins">Migration</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="origins">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~40,000 BCE</div>
+          <div class="timeline-title">Chauvet Cave Art</div>
+          <div class="timeline-desc">Stunning painted caves in southern France reveal sophisticated artistic ability, spiritual sensibility, and intellectual complexity far earlier than expected.</div>
+          <span class="timeline-tag tag-origins">Culture</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="origins">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~15,000 BCE</div>
+          <div class="timeline-title">Lascaux Cave Paintings, France</div>
+          <div class="timeline-desc">Among the most sophisticated Paleolithic art ever discovered. Horses, aurochs, deer, and human figures populate the walls in vivid ochre and black.</div>
+          <span class="timeline-tag tag-origins">Culture</span>
+        </div>
+      </li>
+
+      <li class="era-marker"><div class="era-label-inner">◆ Ice Age Cultures · 20,000 – 10,000 BCE ◆</div></li>
+
+      <li class="timeline-item" data-cat="origins">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~20,000 BCE</div>
+          <div class="timeline-title">Last Glacial Maximum</div>
+          <div class="timeline-desc">Ice sheets cover much of North America and Europe. Sea levels drop by 120 meters. Land bridges connect continents, enabling human migrations to the Americas and Australia.</div>
+          <span class="timeline-tag tag-origins">Ice Age</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="origins">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~16,000 – 13,000 BCE</div>
+          <div class="timeline-title">First Peoples Enter the Americas</div>
+          <div class="timeline-desc">Migration via the Beringian land bridge and possibly coastal routes brings humans to the Western Hemisphere for the first time.</div>
+          <span class="timeline-tag tag-origins">Migration</span>
+        </div>
+      </li>
+
+      <li class="era-marker"><div class="era-label-inner">◆ Megalithic Builders & Neolithic Revolution · 12,000 – 3,000 BCE ◆</div></li>
+
+      <li class="timeline-item" data-cat="ancient" data-modal="gobekli">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~9600 BCE</div>
+          <div class="timeline-title">Göbekli Tepe — Before Agriculture</div>
+          <div class="timeline-desc">The oldest known monumental architecture on Earth, built by hunter-gatherers in what is now Turkey. Rewrites everything we thought we knew about the origins of civilization.</div>
+          <span class="timeline-tag tag-discovery">World-Changing Discovery</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="ancient">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~9000 BCE</div>
+          <div class="timeline-title">Agriculture Begins — Fertile Crescent</div>
+          <div class="timeline-desc">Wild emmer wheat and einkorn begin to be cultivated in the region of modern Turkey, Syria, and Iraq. The Neolithic Revolution transforms human society.</div>
+          <span class="timeline-tag tag-ancient">Neolithic</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="ancient">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~7500 BCE</div>
+          <div class="timeline-title">Çatalhöyük — First Town?</div>
+          <div class="timeline-desc">A densely packed proto-city in Anatolia housing thousands of people. Evidence of art, ritual, and complex social organization predating Mesopotamian cities.</div>
+          <span class="timeline-tag tag-ancient">Settlement</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="ancient">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~3200 BCE</div>
+          <div class="timeline-title">Writing Invented — Sumer</div>
+          <div class="timeline-desc">Cuneiform script emerges in southern Mesopotamia. The first writing system allows complex record-keeping, literature, law, and the transmission of knowledge across generations.</div>
+          <span class="timeline-tag tag-ancient">Ancient</span>
+        </div>
+      </li>
+
+      <li class="era-marker"><div class="era-label-inner">◆ Ancient Civilizations · 3,000 – 500 BCE ◆</div></li>
+
+      <li class="timeline-item" data-cat="ancient">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~2560 BCE</div>
+          <div class="timeline-title">Great Pyramid of Giza Completed</div>
+          <div class="timeline-desc">The tallest man-made structure for 3,800 years. Built during the reign of Pharaoh Khufu, it remains one of humanity's greatest engineering achievements.</div>
+          <span class="timeline-tag tag-ancient">Egypt</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="ancient">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~2300 – 2150 BCE</div>
+          <div class="timeline-title">Akkadian Empire</div>
+          <div class="timeline-desc">Sargon of Akkad creates history's first multi-ethnic empire, unifying Sumerian city-states under centralized Akkadian rule.</div>
+          <span class="timeline-tag tag-ancient">Mesopotamia</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="battle" data-modal="kadesh">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1274 BCE</div>
+          <div class="timeline-title">Battle of Kadesh</div>
+          <div class="timeline-desc">The largest chariot battle in history — Egypt vs. the Hittites. Results in the first recorded peace treaty in human history.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="ancient">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">~1750 BCE</div>
+          <div class="timeline-title">Code of Hammurabi</div>
+          <div class="timeline-desc">One of the oldest deciphered legal texts in the world, establishing 282 laws and the principle "an eye for an eye" in Babylonian society.</div>
+          <span class="timeline-tag tag-ancient">Babylon</span>
+        </div>
+      </li>
+
+      <li class="era-marker"><div class="era-label-inner">◆ Classical Era · 500 BCE – 500 CE ◆</div></li>
+
+      <li class="timeline-item" data-cat="battle" data-modal="marathon">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">490 BCE</div>
+          <div class="timeline-title">Battle of Marathon</div>
+          <div class="timeline-desc">A vastly outnumbered Athenian force repels the Persian invasion under Miltiades. Western civilization's survival arguably decided on a coastal plain in Greece.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="battle" data-modal="thermopylae">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">480 BCE</div>
+          <div class="timeline-title">Battle of Thermopylae</div>
+          <div class="timeline-desc">300 Spartans and 7,000 Greeks hold a mountain pass against the full Persian army under Xerxes. The ultimate sacrifice for freedom and civilization.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="battle" data-modal="gaugamela">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">331 BCE</div>
+          <div class="timeline-title">Battle of Gaugamela</div>
+          <div class="timeline-desc">Alexander the Great defeats Darius III and ends the Persian Empire. The decisive blow in history's most remarkable military campaign.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="battle" data-modal="cannae">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">216 BCE</div>
+          <div class="timeline-title">Battle of Cannae</div>
+          <div class="timeline-desc">Hannibal's masterpiece. 50,000 Romans killed in a single afternoon through a double envelopment maneuver still studied in military academies today.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="era-marker"><div class="era-label-inner">◆ Medieval Era · 500 – 1500 CE ◆</div></li>
+
+      <li class="timeline-item" data-cat="medieval" data-modal="tours">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">732 CE</div>
+          <div class="timeline-title">Battle of Tours</div>
+          <div class="timeline-desc">Charles Martel halts the Umayyad advance into Western Europe, preserving Frankish territory and profoundly shaping the future of European Christianity.</div>
+          <span class="timeline-tag tag-medieval">Medieval</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="medieval" data-modal="hastings">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1066 CE</div>
+          <div class="timeline-title">Battle of Hastings</div>
+          <div class="timeline-desc">William the Conqueror defeats Harold II. Norman rule transforms England forever — its language, law, culture, and architecture permanently altered.</div>
+          <span class="timeline-tag tag-medieval">Medieval</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="medieval">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1206 CE</div>
+          <div class="timeline-title">Genghis Khan Unifies the Mongols</div>
+          <div class="timeline-desc">Temüjin unifies the Mongol tribes and launches the greatest land empire in human history, connecting East and West through trade and conquest.</div>
+          <span class="timeline-tag tag-medieval">Mongols</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="medieval" data-modal="constantinople">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1453 CE</div>
+          <div class="timeline-title">Fall of Constantinople</div>
+          <div class="timeline-desc">Mehmed II ends the Byzantine Empire after 1,100 years. The medieval world ends. A new era begins.</div>
+          <span class="timeline-tag tag-medieval">Medieval</span>
+        </div>
+      </li>
+
+      <li class="era-marker"><div class="era-label-inner">◆ Early Modern to Modern Era · 1500 – Present ◆</div></li>
+
+      <li class="timeline-item" data-cat="modern" data-modal="austerlitz">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1805 CE</div>
+          <div class="timeline-title">Battle of Austerlitz</div>
+          <div class="timeline-desc">Napoleon's greatest victory. The "Battle of the Three Emperors" — Napoleon defeats the combined armies of Austria and Russia in under nine hours.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="modern" data-modal="waterloo">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1815 CE</div>
+          <div class="timeline-title">Battle of Waterloo</div>
+          <div class="timeline-desc">Wellington and Blücher defeat Napoleon, ending the Napoleonic Wars and reshaping the map of Europe for a century.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="modern">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1916 CE</div>
+          <div class="timeline-title">Battle of the Somme</div>
+          <div class="timeline-desc">60,000 British casualties on the first day alone. The industrialized slaughter of World War I exposed the catastrophic mismatch between old tactics and modern weaponry.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="modern">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1942–1943 CE</div>
+          <div class="timeline-title">Battle of Stalingrad</div>
+          <div class="timeline-desc">The bloodiest battle in human history. The decisive turning point of World War II on the Eastern Front — over two million casualties in five months.</div>
+          <span class="timeline-tag tag-battle">Battle</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="discovery">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">1994 CE</div>
+          <div class="timeline-title">Göbekli Tepe Excavations Begin</div>
+          <div class="timeline-desc">Klaus Schmidt begins systematic excavations at a site that will prove to be the oldest monumental structure on Earth — rewriting the origins of civilization.</div>
+          <span class="timeline-tag tag-discovery">Discovery</span>
+        </div>
+      </li>
+
+      <li class="timeline-item" data-cat="discovery">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="timeline-date">2010s–2020s CE</div>
+          <div class="timeline-title">LiDAR Reveals Hidden Cities</div>
+          <div class="timeline-desc">Laser-scanning technology reveals massive urban networks beneath the Amazon rainforest and dense Maya jungle — civilizations of millions we never knew existed.</div>
+          <span class="timeline-tag tag-discovery">Discovery</span>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>
+</section>
+
+<!-- WHAT ELSE WAS HAPPENING -->
+<section id="what-else">
+<div class="container">
+  <div class="wewh-hero">
+    <div class="section-label" style="justify-content:center;display:flex;">Signature Feature</div>
+    <h2 class="wewh-title">What Else Was Happening?</h2>
+    <p class="wewh-sub">Select a historical date and discover what was occurring simultaneously across every region of the globe. History was never isolated.</p>
+    <div class="date-selector">
+      <button class="date-btn active" data-period="9600bce">9600 BCE</button>
+      <button class="date-btn" data-period="3000bce">3000 BCE</button>
+      <button class="date-btn" data-period="500bce">500 BCE</button>
+      <button class="date-btn" data-period="1bce">1 BCE / 1 CE</button>
+      <button class="date-btn" data-period="1000ce">1000 CE</button>
+      <button class="date-btn" data-period="1300ce">1300 CE</button>
+      <button class="date-btn" data-period="1800ce">1800 CE</button>
+      <button class="date-btn" data-period="1944ce">1944 CE</button>
+    </div>
+  </div>
+
+  <div class="wewh-display active" id="wewh-9600bce">
+    <h3 class="wewh-period-title">The World in 9600 BCE</h3>
+    <p class="wewh-period-sub">At the dawn of the Holocene — as Göbekli Tepe was being constructed in southeastern Turkey</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌍 Middle East</div><div class="wewh-region-event">Göbekli Tepe under construction. Hunter-gatherers are building the world's first monumental complex. Early experimentation with plant cultivation beginning in the Fertile Crescent.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌎 North America</div><div class="wewh-region-event">Ice sheets retreating. Paleo-Indian hunter-gatherer societies tracking megafauna across the continent. Clovis culture at its height in the Great Plains.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Africa</div><div class="wewh-region-event">The Sahara is experiencing a "Green Period" — rivers, lakes, and grasslands where desert now exists. Hunter-gatherer populations thrive across the continent.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 East Asia</div><div class="wewh-region-event">Early rice cultivation experiments beginning in the Yangtze River valley. The Jōmon culture of Japan among the earliest pottery-making societies on Earth.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌍 Europe</div><div class="wewh-region-event">Mesolithic cultures spread across post-glacial Europe. Hunter-gatherers moving northward as ice retreats. Doggerland still connecting Britain to continental Europe.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 South Asia</div><div class="wewh-region-event">Early Holocene cultures along the Indian subcontinent. Mehrgarh in present-day Pakistan shows early permanent settlement and cultivation beginning around this time.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌎 South America</div><div class="wewh-region-event">Early settlement expansion across the continent. Monte Verde in Chile already occupied for thousands of years. Hunter-gatherers throughout the Amazon basin.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌏 Central Asia</div><div class="wewh-region-event">Mobile hunter-gatherer bands following animal migrations across the vast Eurasian steppe. Horse domestication still thousands of years away.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Oceania</div><div class="wewh-region-event">Australia already inhabited for 50,000 years. Sophisticated Aboriginal cultures with rich oral traditions, art, and knowledge of the land across the continent.</div></div>
+    </div>
+  </div>
+
+  <div class="wewh-display" id="wewh-3000bce">
+    <h3 class="wewh-period-title">The World in 3000 BCE</h3>
+    <p class="wewh-period-sub">The dawn of recorded history — writing has just been invented; the Bronze Age begins</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌍 Middle East</div><div class="wewh-region-event">Sumerian city-states of Uruk, Ur, and Eridu flourishing. Cuneiform writing just invented. The first urban civilization on Earth, with temples, trade, and administration.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Egypt</div><div class="wewh-region-event">Unification of Upper and Lower Egypt under the first pharaohs. Hieroglyphic writing being developed. The Nile Valley civilization entering its formative dynastic period.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 South Asia</div><div class="wewh-region-event">Indus Valley Civilization emerging at Mohenjo-daro and Harappa. Planned cities with grid streets, sewage systems, and standardized weights — ahead of their time.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 East Asia</div><div class="wewh-region-event">Longshan culture in China developing proto-urban communities. Black burnished pottery and evidence of social stratification. Rice and millet cultivation widespread.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌍 Europe</div><div class="wewh-region-event">Megalithic monument building at its peak. Stonehenge construction beginning. Newgrange in Ireland already ancient. Europe covered in mysterious stone circles and passage tombs.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌎 Americas</div><div class="wewh-region-event">Norte Chico civilization emerging in coastal Peru — one of the earliest complex societies in the Americas, with monumental architecture and recording systems.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌏 Central Asia</div><div class="wewh-region-event">Nomadic pastoralism established across the Eurasian steppe. Horse domestication transforming mobility and warfare across the region.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌍 Sub-Saharan Africa</div><div class="wewh-region-event">Saharan rock art documenting cattle herders and hunters. West African agriculture developing independently. Great diversity of cultures across the continent.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Oceania</div><div class="wewh-region-event">Aboriginal Australians maintaining one of the world's oldest continuous cultures. Evidence of sophisticated fire management and landscape modification.</div></div>
+    </div>
+  </div>
+
+  <div class="wewh-display" id="wewh-500bce">
+    <h3 class="wewh-period-title">The World in 500 BCE</h3>
+    <p class="wewh-period-sub">The Axial Age — simultaneous philosophical revolutions across the world</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌍 Greece</div><div class="wewh-region-event">Golden Age of Athens dawning. Democracy being developed. Socrates, Plato, and Aristotle approaching. The Persian Wars about to test Greek civilization.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 South Asia</div><div class="wewh-region-event">Siddhartha Gautama (Buddha) teaching in the Ganges plain. The Mahajanapadas — sixteen great kingdoms competing for dominance. Vedic civilization transforming.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 East Asia</div><div class="wewh-region-event">Confucius teaching in the Spring and Autumn period of Chinese history. Warring States period approaching. Sun Tzu writing The Art of War. Chinese philosophical golden age.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌍 Middle East</div><div class="wewh-region-event">Persian Empire under Cyrus the Great at its height — the world's largest empire. Zoroastrianism shaping Persian culture. Jewish exiles returning from Babylon.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌎 Americas</div><div class="wewh-region-event">Olmec civilization declining in Mesoamerica. Monte Albán being founded in Oaxaca. Adena mound-building culture in North America. Chavín culture in the Andes.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌍 Carthage</div><div class="wewh-region-event">Carthage dominating western Mediterranean trade. Phoenician colonies stretching from North Africa to Iberia. The great naval power of the ancient world.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Africa</div><div class="wewh-region-event">Kingdom of Kush dominating the upper Nile, having previously conquered Egypt. Nok culture in West Africa producing remarkable terracotta sculptures.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌍 Europe (North)</div><div class="wewh-region-event">Celtic Iron Age cultures spreading across central and western Europe. La Tène culture flourishing with sophisticated metalwork, art, and warrior societies.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 Central Asia</div><div class="wewh-region-event">Scythian nomads dominating the Eurasian steppe from the Black Sea to western China. Famous for their horsemanship, gold metalwork, and fearsome raids.</div></div>
+    </div>
+  </div>
+
+  <div class="wewh-display" id="wewh-1bce">
+    <h3 class="wewh-period-title">The World around 1 BCE / 1 CE</h3>
+    <p class="wewh-period-sub">The height of the Roman Empire — and a world of parallel civilizations</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌍 Rome</div><div class="wewh-region-event">Augustus Caesar ruling the Roman Empire at its height. The Pax Romana beginning. A population of ~50 million under Roman governance. The city of Rome reaches one million people.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 China</div><div class="wewh-region-event">Han Dynasty at its zenith — an empire comparable in size and sophistication to Rome. The Silk Road connecting East and West. Paper being developed. Population of ~60 million.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 South Asia</div><div class="wewh-region-event">Satavahana Empire flourishing in the Deccan. Indo-Greek kingdoms in the northwest. Buddhism spreading across Asia. Kushan Empire forming along the Silk Road.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌍 Middle East</div><div class="wewh-region-event">Parthian Empire controlling Mesopotamia and Persia, a rival to Rome. The Nabataean Kingdom at Petra controlling Arabian trade routes. Judea under Roman administration.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Africa</div><div class="wewh-region-event">Kingdom of Aksum rising in East Africa. Nubian Meroë kingdom a major iron-smelting center. North Africa largely under Roman control. Bantu migrations continuing southward.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌎 Americas</div><div class="wewh-region-event">Maya civilization in its Preclassic period, building pyramids in Guatemala. Teotihuacan being founded in central Mexico — will become one of the largest cities on Earth.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌎 South America</div><div class="wewh-region-event">Tiwanaku culture emerging near Lake Titicaca. Moche culture developing on the northern Peruvian coast with elaborate ceramics and adobe pyramids.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌍 Europe (North)</div><div class="wewh-region-event">Germanic tribes, Celts, and Scandinavians living beyond Roman frontiers. The great migrations not yet begun. Roman legions probing the Rhine and Danube borders.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Oceania</div><div class="wewh-region-event">Polynesian voyagers beginning their remarkable Pacific expansion. The greatest navigational achievement in human history — settling the Pacific using stars, waves, and birds.</div></div>
+    </div>
+  </div>
+
+  <div class="wewh-display" id="wewh-1000ce">
+    <h3 class="wewh-period-title">The World in 1000 CE</h3>
+    <p class="wewh-period-sub">Medieval high point — Islamic Golden Age, Viking exploration, Song Dynasty renaissance</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌍 Islamic World</div><div class="wewh-region-event">Islamic Golden Age at its peak. Baghdad, Cairo, and Córdoba are the world's largest cities. Algebra, astronomy, medicine, and philosophy flourishing while Europe is in relative darkness.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 China</div><div class="wewh-region-event">Song Dynasty — perhaps the most technologically advanced civilization on Earth. Gunpowder, printing, the compass, paper money. A prosperous, urbanized empire of 100 million.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌍 Europe</div><div class="wewh-region-event">High Medieval period. Feudal kingdoms solidifying. The Holy Roman Empire under Otto III. Viking raids giving way to Norse settlements. Norman conquests reshaping England and Sicily.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌎 North America</div><div class="wewh-region-event">Cahokia near modern St. Louis is larger than London. Mississippian culture at its height. Chaco Canyon a major ceremonial and trade center in the Southwest.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌎 Mesoamerica</div><div class="wewh-region-event">Toltec Empire dominating central Mexico. Maya civilization fragmented but still producing remarkable art and architecture. Chichén Itzá a major regional capital.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Sub-Saharan Africa</div><div class="wewh-region-event">Kingdom of Ghana controlling trans-Saharan gold and salt trade. Zimbabwe plateau cultures building in stone. East African city-states trading with Arabia, India, and China.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌏 South Asia</div><div class="wewh-region-event">Chola Empire dominating South India and Sri Lanka, with naval expeditions reaching Southeast Asia. Rajput kingdoms in the north. The Hindu temple-building golden age.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Central Asia</div><div class="wewh-region-event">Seljuk Turks beginning their rise. The great Silk Road cities of Samarkand and Bukhara thriving under Samanid and Ghaznavid patronage.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 Oceania</div><div class="wewh-region-event">Polynesian voyagers settling Hawaii and New Zealand — the final chapter of the greatest maritime expansion in history. The Pacific Ocean fully charted by human knowledge.</div></div>
+    </div>
+  </div>
+
+  <div class="wewh-display" id="wewh-1300ce">
+    <h3 class="wewh-period-title">The World in 1300 CE</h3>
+    <p class="wewh-period-sub">The Mongol Century — and the last great pre-Columbian world</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌏 Mongol Empire</div><div class="wewh-region-event">The largest contiguous land empire in history spanning from Korea to Poland. Kublai Khan ruling China as the Yuan Dynasty. The Pax Mongolica enabling unprecedented trade.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌍 Europe</div><div class="wewh-region-event">Gothic cathedrals being constructed across Europe. The Crusades winding down. Italian city-states beginning the proto-Renaissance. The Black Death approaching on the horizon.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌍 Islamic World</div><div class="wewh-region-event">Mali Empire under Mansa Musa becoming the richest kingdom on Earth. The Mamluk Sultanate stopping the Mongols in Egypt. Delhi Sultanate controlling northern India.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌎 Americas</div><div class="wewh-region-event">Aztec/Mexica people arriving in the Valley of Mexico, founding Tenochtitlán in 1325. Inca expansion beginning in Peru. Mississippi cultures thriving in North America.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 Southeast Asia</div><div class="wewh-region-event">Angkor at its peak — the largest pre-industrial city on Earth. Majapahit Empire dominating maritime Southeast Asia. Sukhothai Kingdom in Thailand newly founded.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Africa</div><div class="wewh-region-event">Great Zimbabwe at its height — a major stone-built city and trading center in southern Africa. Swahili city-states like Kilwa among the richest ports in the Indian Ocean world.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌏 Japan</div><div class="wewh-region-event">Kamakura shogunate. The failed Mongol invasions of 1274 and 1281 repelled by storms (the "divine winds"). Samurai culture at its height. Zen Buddhism spreading.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Central Asia</div><div class="wewh-region-event">The Golden Horde controlling Russia and the western Eurasian steppe. Silk Road cities recovering from Mongol destruction under Pax Mongolica trade.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 Oceania</div><div class="wewh-region-event">New Zealand (Aotearoa) recently settled by Māori — the last major land mass to be inhabited by humans. Complex Pacific trading networks well established.</div></div>
+    </div>
+  </div>
+
+  <div class="wewh-display" id="wewh-1800ce">
+    <h3 class="wewh-period-title">The World in 1800 CE</h3>
+    <p class="wewh-period-sub">The eve of industrialization — Napoleonic wars reshaping Europe</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌍 Europe</div><div class="wewh-region-event">Napoleon Bonaparte restructuring Europe. The Industrial Revolution beginning in Britain. Enlightenment ideas transforming political philosophy. The American and French Revolutions just concluded.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 China</div><div class="wewh-region-event">Qing Dynasty at its territorial peak but beginning internal strain. The world's most populous empire. Western trade increasing through Canton. The Opium Wars still decades away.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌍 Ottoman Empire</div><div class="wewh-region-event">Ottoman Empire still powerful but facing reform pressures. Napoleon's Egypt campaign just ended. The empire controlling a vast territory from the Balkans to Arabia.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌎 Americas</div><div class="wewh-region-event">United States just 25 years old. Latin American independence movements building. Haitian Revolution — the only successful slave revolution in history — just concluding.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 South Asia</div><div class="wewh-region-event">British East India Company expanding control across India. Maratha Empire at war. The subcontinent increasingly under colonial pressure. Ranjit Singh unifying the Sikh Empire.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Africa</div><div class="wewh-region-event">Trans-Atlantic slave trade approaching its peak. Zulu Kingdom emerging in southern Africa. The great interior of Africa largely unknown to Europeans. Egyptian Mamluks ruling the Nile.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌏 Japan</div><div class="wewh-region-event">Tokugawa shogunate maintaining strict isolation policy (Sakoku). Edo (Tokyo) one of the world's largest cities. Feudal Japan in a period of unusual internal peace.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Southeast Asia</div><div class="wewh-region-event">Nguyen Dynasty unifying Vietnam. Konbaung Dynasty in Burma. European colonial pressure increasing across the region. The great spice trade transforming.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌏 Oceania</div><div class="wewh-region-event">British colonization of Australia beginning (1788). Māori New Zealand engaged with early European contact. The Pacific islands being mapped by European explorers.</div></div>
+    </div>
+  </div>
+
+  <div class="wewh-display" id="wewh-1944ce">
+    <h3 class="wewh-period-title">The World in 1944 CE</h3>
+    <p class="wewh-period-sub">The turning point of the Second World War</p>
+    <div class="wewh-grid">
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌍 Western Europe</div><div class="wewh-region-event">D-Day (June 6) — Allied forces land in Normandy. Liberation of Paris in August. Nazi Germany fighting on two fronts. The beginning of the end of the Third Reich.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-orange)">🌍 Eastern Europe</div><div class="wewh-region-event">Soviet forces pushing west after Stalingrad and Kursk. Operation Bagration destroys Army Group Centre. Warsaw Uprising. The Red Army racing toward Berlin.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Pacific</div><div class="wewh-region-event">American island-hopping campaign advancing toward Japan. Battle of the Philippine Sea (Marianas Turkey Shoot). MacArthur returning to the Philippines. Japan's position deteriorating.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--gold)">🌏 South/Southeast Asia</div><div class="wewh-region-event">Burma Campaign intensifying. Battle of Kohima and Imphal stops Japanese advance into India. Nationalist movements gaining momentum across the colonial world.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-green)">🌍 Africa</div><div class="wewh-region-event">North Africa campaign concluded (1943). Many African soldiers serving in Allied forces. Seeds of independence movements being planted across the continent.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-teal)">🌏 China</div><div class="wewh-region-event">Civil war suspended for united resistance against Japan. Operation Ichi-go — Japan's last major offensive in China. Communist and Nationalist forces both fighting Japan.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-purple)">🌍 Middle East</div><div class="wewh-region-event">Relatively stable under Allied control. The region's strategic oil supplies crucial to the Allied war effort. Post-war plans for the region already being debated.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-red)">🌎 Americas</div><div class="wewh-region-event">United States the "Arsenal of Democracy" — producing ships, planes, and weapons at an unprecedented scale. The Manhattan Project secretly underway in Los Alamos.</div></div>
+      <div class="wewh-region"><div class="wewh-region-name" style="color:var(--accent-blue)">🌏 Oceania</div><div class="wewh-region-event">Australia serving as a major Allied base for Pacific operations. New Guinea campaign being fought. The Pacific war transforming the strategic importance of the entire region.</div></div>
+    </div>
+  </div>
+
+</div>
+</section>
+
+<!-- FIRST TEMPLES -->
+<section id="first-temples">
+<div class="container">
+  <div class="section-label">Featured Exhibition</div>
+  <h2 class="section-title">The First Temples?</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">Before cities. Before agriculture. Before writing. Someone built a cathedral in the wilderness. Why?</p>
+
+  <div class="temples-hero">
+    <div class="temples-hero-bg"></div>
+    <div class="temples-hero-content">
+      <div class="section-label">Southeastern Turkey · ~9600 BCE</div>
+      <h2 style="font-family:var(--font-head);font-size:2rem;margin-bottom:1rem;">Göbekli Tepe</h2>
+      <p style="color:var(--gray);font-size:0.9rem;line-height:1.7;max-width:480px;">The site that rewrote history. Built 6,000 years before Stonehenge and 7,000 years before the Great Pyramid — by people who had not yet invented agriculture.</p>
+      <a href="#great-debate" class="btn btn-gold" style="margin-top:1.5rem;">Explore the Great Debate →</a>
+    </div>
+    <div style="position:absolute;right:0;top:0;bottom:0;width:40%;display:flex;align-items:center;justify-content:center;padding:2rem;">
+      <div class="img-placeholder" style="width:100%;height:100%;">
+        <div class="img-placeholder-icon">🏛️</div>
+        <p>High-resolution aerial view of Göbekli Tepe archaeological site in southeastern Turkey</p>
+        <span style="color:var(--gold3);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;">Image Placeholder</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:3rem;">
+    <div class="img-placeholder" style="min-height:200px;">
+      <div class="img-placeholder-icon">🗺️</div>
+      <p>Top-down map showing Göbekli Tepe, Karahan Tepe, Sefer Tepe, Sayburç, and surrounding Taş Tepeler sites</p>
+    </div>
+    <div class="img-placeholder" style="min-height:200px;">
+      <div class="img-placeholder-icon">🎨</div>
+      <p>Reconstruction illustration of Göbekli Tepe during active occupation</p>
+    </div>
+    <div class="img-placeholder" style="min-height:200px;">
+      <div class="img-placeholder-icon">🏺</div>
+      <p>Close-up of T-shaped pillars with animal carvings — foxes, snakes, birds, and unknown beings</p>
+    </div>
+  </div>
+
+  <div class="site-cards">
+    <div class="site-card" id="card-gobekli">
+      <div class="site-card-header" onclick="toggleCard('card-gobekli')">
+        <div>
+          <div class="site-card-title">Göbekli Tepe</div>
+          <div class="site-card-date">~9600–8000 BCE · Şanlıurfa Province, Turkey</div>
+        </div>
+        <span class="expand-icon">▾</span>
+      </div>
+      <div class="site-card-body">
+        <p>Discovered in 1963 but not recognized for its significance until Klaus Schmidt's excavations began in 1994, Göbekli Tepe has fundamentally altered our understanding of the origins of human civilization. The site contains at least 20 circular enclosures ringed by massive T-shaped limestone pillars up to 5.5 meters tall and weighing up to 10 tons — carved with elaborate reliefs of animals, abstract symbols, and possible anthropomorphic figures.</p>
+        <div class="site-fact"><span class="site-fact-label">DATE</span><span class="site-fact-val">~9600 BCE — predating agriculture in the region by 500–1,000 years</span></div>
+        <div class="site-fact"><span class="site-fact-label">BUILDERS</span><span class="site-fact-val">Hunter-gatherers. No evidence of permanent settlement at the site.</span></div>
+        <div class="site-fact"><span class="site-fact-label">PILLARS</span><span class="site-fact-val">T-shaped limestone, up to 5.5m tall, 10 tons. Carved with foxes, snakes, vultures, cranes, boars, spiders, and unidentified beings.</span></div>
+        <div class="site-fact"><span class="site-fact-label">SIGNIFICANCE</span><span class="site-fact-val">Oldest known monumental architecture on Earth. Deliberately buried around 8000 BCE — why remains unknown.</span></div>
+        <div class="site-fact"><span class="site-fact-label">MYSTERY</span><span class="site-fact-val">Who built it? How? Why was it buried? What do the carvings mean? These questions remain unanswered.</span></div>
+      </div>
+    </div>
+
+    <div class="site-card" id="card-karahan">
+      <div class="site-card-header" onclick="toggleCard('card-karahan')">
+        <div>
+          <div class="site-card-title">Karahan Tepe</div>
+          <div class="site-card-date">~9400 BCE · Şanlıurfa Province, Turkey</div>
+        </div>
+        <span class="expand-icon">▾</span>
+      </div>
+      <div class="site-card-body">
+        <p>Karahan Tepe may be even more remarkable than Göbekli Tepe. Discovered in 1997 but only seriously excavated from 2019, it contains a series of stone pillars carved directly from bedrock, with some bearing disturbingly realistic human faces and phalluses — unlike anything seen at other sites.</p>
+        <div class="site-fact"><span class="site-fact-label">UNIQUE FEATURE</span><span class="site-fact-val">Pillars carved directly from natural bedrock. Hyper-realistic human heads emerging from the rock. Suggests a fundamentally different ritual purpose than Göbekli Tepe.</span></div>
+        <div class="site-fact"><span class="site-fact-label">SCALE</span><span class="site-fact-val">Comparable in scale to Göbekli Tepe. Over 250 pillars identified across the site.</span></div>
+        <div class="site-fact"><span class="site-fact-label">STATUS</span><span class="site-fact-val">Active excavations ongoing. New discoveries being made each season.</span></div>
+      </div>
+    </div>
+
+    <div class="site-card" id="card-sefer">
+      <div class="site-card-header" onclick="toggleCard('card-sefer')">
+        <div>
+          <div class="site-card-title">Sefer Tepe</div>
+          <div class="site-card-date">~9600–8000 BCE · Şanlıurfa Province, Turkey</div>
+        </div>
+        <span class="expand-icon">▾</span>
+      </div>
+      <div class="site-card-body">
+        <p>Part of the emerging Taş Tepeler ("Stone Hills") network of sites identified in the Şanlıurfa region. Sefer Tepe shows similar T-shaped pillar architecture and animal carvings, suggesting a widespread regional tradition of monumental ceremonial construction rather than an isolated phenomenon.</p>
+        <div class="site-fact"><span class="site-fact-label">NETWORK</span><span class="site-fact-val">Part of a growing network of similar sites suggesting a regional culture of ceremonial construction across southeastern Turkey.</span></div>
+        <div class="site-fact"><span class="site-fact-label">EXCAVATION</span><span class="site-fact-val">Limited excavation to date. Surface finds suggest significant structures beneath.</span></div>
+      </div>
+    </div>
+
+    <div class="site-card" id="card-sayburc">
+      <div class="site-card-header" onclick="toggleCard('card-sayburc')">
+        <div>
+          <div class="site-card-title">Sayburç</div>
+          <div class="site-card-date">~9000 BCE · Şanlıurfa Province, Turkey</div>
+        </div>
+        <span class="expand-icon">▾</span>
+      </div>
+      <div class="site-card-body">
+        <p>Sayburç, announced to the world in 2023, contains some of the most extraordinary narrative rock art of the Neolithic world — a scene showing a human figure holding his phallus surrounded by animals, suggesting complex mythological storytelling at a remarkably early date.</p>
+        <div class="site-fact"><span class="site-fact-label">DISCOVERY</span><span class="site-fact-val">Announced 2023. Contains possible narrative scene — among the earliest known figurative narratives.</span></div>
+        <div class="site-fact"><span class="site-fact-label">ART</span><span class="site-fact-val">Relief carvings depicting a human figure with a leopard and bull — possibly representing a mythological narrative.</span></div>
+        <div class="site-fact"><span class="site-fact-label">SIGNIFICANCE</span><span class="site-fact-val">Suggests sophisticated storytelling, mythology, and symbolic thought 11,000 years ago.</span></div>
+      </div>
+    </div>
+
+    <div class="site-card" id="card-nevali">
+      <div class="site-card-header" onclick="toggleCard('card-nevali')">
+        <div>
+          <div class="site-card-title">Nevali Çori</div>
+          <div class="site-card-date">~8400–8000 BCE · Şanlıurfa Province, Turkey</div>
+        </div>
+        <span class="expand-icon">▾</span>
+      </div>
+      <div class="site-card-body">
+        <p>Nevali Çori, now submerged beneath the Atatürk reservoir, was excavated in the 1980s and provided crucial early evidence of T-shaped pillars and cult buildings in the pre-pottery Neolithic period, paving the way for understanding Göbekli Tepe.</p>
+        <div class="site-fact"><span class="site-fact-label">STATUS</span><span class="site-fact-val">Now underwater beneath the Atatürk Dam reservoir. Key finds preserved in Şanlıurfa Museum.</span></div>
+        <div class="site-fact"><span class="site-fact-label">IMPORTANCE</span><span class="site-fact-val">Contained early T-shaped pillars and a "cult building" — helping establish the regional tradition that Göbekli Tepe represents.</span></div>
+      </div>
+    </div>
+
+    <div class="site-card" id="card-tas">
+      <div class="site-card-header" onclick="toggleCard('card-tas')">
+        <div>
+          <div class="site-card-title">The Taş Tepeler Network</div>
+          <div class="site-card-date">~9600–8000 BCE · Southeastern Turkey</div>
+        </div>
+        <span class="expand-icon">▾</span>
+      </div>
+      <div class="site-card-body">
+        <p>Turkish archaeologists have identified over a dozen sites in the Şanlıurfa region sharing similar architectural and artistic traditions — collectively called the Taş Tepeler ("Stone Hills") sites. This network suggests not an isolated phenomenon but a widespread Neolithic culture of ceremonial monument-building across a vast region.</p>
+        <div class="site-fact"><span class="site-fact-label">SITES KNOWN</span><span class="site-fact-val">Göbekli Tepe, Karahan Tepe, Sefer Tepe, Sayburç, Taştepeler, Yeni Mahalle, Ayanlar, Harbetsuvan and more.</span></div>
+        <div class="site-fact"><span class="site-fact-label">IMPLICATION</span><span class="site-fact-val">This was not a single genius site — it was a civilization. A spiritual and ceremonial culture of extraordinary sophistication that predates everything we previously called "civilization."</span></div>
+        <div class="site-fact"><span class="site-fact-label">ONGOING</span><span class="site-fact-val">New sites continue to be identified. The full extent of this culture is still unknown.</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- GREAT DEBATE -->
+<section id="great-debate">
+<div class="container">
+  <div class="section-label">Archaeological Hypothesis</div>
+  <h2 class="section-title">Did Spirituality Come Before Agriculture?</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">One of the most provocative debates in modern archaeology. The evidence from Göbekli Tepe has forced scholars to question which came first — the city, or the cathedral.</p>
+
+  <div class="highlight-banner">
+    <div class="hb-icon">⚠️</div>
+    <div class="hb-text">
+      <h4>This Is an Active Scholarly Debate</h4>
+      <p>The hypothesis presented below reflects ongoing archaeological discussion. It remains unresolved. The evidence from Göbekli Tepe is real; the interpretation of what it means is contested. Good history requires holding uncertainty with intellectual honesty.</p>
+    </div>
+  </div>
+
+  <div class="debate-models">
+    <div class="debate-model traditional">
+      <h3>The Traditional Model</h3>
+      <div class="model-flow">
+        <div class="model-step"><div class="model-step-num">1</div><div class="model-step-text">Agriculture emerges — humans settle near reliable food sources</div></div>
+        <div class="model-arrow">↓</div>
+        <div class="model-step"><div class="model-step-num">2</div><div class="model-step-text">Permanent settlements form — surplus food enables specialization</div></div>
+        <div class="model-arrow">↓</div>
+        <div class="model-step"><div class="model-step-num">3</div><div class="model-step-text">Social complexity emerges — including religion, ritual, and monuments</div></div>
+        <div class="model-arrow">↓</div>
+        <div class="model-step"><div class="model-step-num">4</div><div class="model-step-text">Civilization — cities, writing, organized religion</div></div>
+      </div>
+    </div>
+    <div class="debate-model alternative">
+      <h3>The Alternative Hypothesis</h3>
+      <div class="model-flow">
+        <div class="model-step"><div class="model-step-num">1</div><div class="model-step-text">Ritual gathering places are constructed — requiring organized labor from wide areas</div></div>
+        <div class="model-arrow">↓</div>
+        <div class="model-step"><div class="model-step-num">2</div><div class="model-step-text">Large gatherings require food production — encouraging proto-agriculture</div></div>
+        <div class="model-arrow">↓</div>
+        <div class="model-step"><div class="model-step-num">3</div><div class="model-step-text">Cooperation and social bonds form — facilitating permanent settlement</div></div>
+        <div class="model-arrow">↓</div>
+        <div class="model-step"><div class="model-step-num">4</div><div class="model-step-text">Agriculture and civilization — born from spiritual and social impulse</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--card);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:2rem;margin-bottom:2rem;">
+    <h3 style="font-family:var(--font-head);font-size:1.1rem;margin-bottom:1.25rem;color:var(--gold);">The Evidence Supporting the Alternative Hypothesis</h3>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+      <div>
+        <div class="site-fact" style="margin-bottom:0.75rem;"><span class="site-fact-label" style="min-width:20px;">▸</span><span class="site-fact-val">Göbekli Tepe was built by hunter-gatherers — people with no agriculture or permanent settlements.</span></div>
+        <div class="site-fact" style="margin-bottom:0.75rem;"><span class="site-fact-label" style="min-width:20px;">▸</span><span class="site-fact-val">Animal carvings dominate the pillars — suggesting a hunter's symbolic world, not a farmer's.</span></div>
+        <div class="site-fact" style="margin-bottom:0.75rem;"><span class="site-fact-label" style="min-width:20px;">▸</span><span class="site-fact-val">Large gatherings for construction and ritual would require coordinated food provision.</span></div>
+      </div>
+      <div>
+        <div class="site-fact" style="margin-bottom:0.75rem;"><span class="site-fact-label" style="min-width:20px;">▸</span><span class="site-fact-val">The wild ancestor of wheat (einkorn) grows on the slopes of Göbekli Tepe's hill — possibly domesticated here.</span></div>
+        <div class="site-fact" style="margin-bottom:0.75rem;"><span class="site-fact-label" style="min-width:20px;">▸</span><span class="site-fact-val">Agriculture emerges in the broader region within 500–1,000 years of Göbekli Tepe's primary occupation.</span></div>
+        <div class="site-fact" style="margin-bottom:0.75rem;"><span class="site-fact-label" style="min-width:20px;">▸</span><span class="site-fact-val">The site appears to have been deliberately buried — as if the builders knew a world was ending.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="debate-note">"The most likely scenario is that Göbekli Tepe was not the cause of agriculture, but that the same social processes that made it possible also made agriculture possible. We may be looking at the material remains of a cognitive and social revolution." — Paraphrase of current scholarly thinking on the site's significance.</div>
+
+</div>
+</section>
+
+<!-- MY VISIT -->
+<section id="my-visit">
+<div class="container">
+  <div class="section-label">Personal Journey</div>
+  <h2 class="section-title">My Visit to Göbekli Tepe</h2>
+  <div class="gold-line"></div>
+
+  <div class="visit-layout">
+    <div>
+      <div class="video-wrapper">
+        <iframe src="https://www.youtube.com/embed/jPI29MX9LUc" allowfullscreen loading="lazy" title="Personal footage from Göbekli Tepe visit"></iframe>
+      </div>
+      <p style="font-family:var(--font-label);font-size:0.7rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-top:1rem;text-align:center;">Personal footage from my second visit to Turkey, including Göbekli Tepe and other historical sites.</p>
+    </div>
+    <div class="visit-text">
+      <p class="visit-caption">Travel Journal · Şanlıurfa, Turkey</p>
+      <h2>Walking Among the World's Oldest Monuments</h2>
+      <p>Standing at Göbekli Tepe is unlike any other historical experience. The scale of the T-shaped pillars, the quality of the carvings, and the sheer antiquity of the site — 11,600 years old — creates a feeling of profound connection to our most ancient ancestors.</p>
+      <p>What strikes you immediately is not just the age, but the sophistication. These people — whoever they were, whatever they believed — were not primitive. They were us. They gazed at the same stars, told stories, feared death, sought meaning. The carvings on those pillars are their message to the future.</p>
+      <p>This website is, in part, an attempt to share that experience — and to place it in the context of everything we know about the human story.</p>
+      <div class="visit-highlights">
+        <div class="visit-highlight"><div class="vh-icon">🏛️</div><div class="vh-text"><strong>The Enclosures</strong>Circular arrangements of T-pillars, some still partially buried, stretching across the hilltop in every direction.</div></div>
+        <div class="visit-highlight"><div class="vh-icon">🦊</div><div class="vh-text"><strong>The Carvings</strong>Foxes, snakes, boars, cranes, vultures — a bestiary of the ancient world carved with extraordinary skill.</div></div>
+        <div class="visit-highlight"><div class="vh-icon">🌅</div><div class="vh-text"><strong>The View</strong>Standing where 11,600-year-old builders stood, looking out over the same Anatolian hills they saw.</div></div>
+        <div class="visit-highlight"><div class="vh-icon">🤔</div><div class="vh-text"><strong>The Questions</strong>Every answer at Göbekli Tepe generates three more questions. That's what makes it extraordinary.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- CIVILIZATIONS -->
+<section id="civilizations">
+<div class="container">
+  <div class="section-label">Ancient & Medieval Civilizations</div>
+  <h2 class="section-title">The Great Civilizations</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">From Sumer's first cities to the Renaissance — the civilizations that built the world we inherited.</p>
+
+  <div class="civ-grid">
+    <div class="civ-card" style="border-color:rgba(201,168,76,0.15)"><div class="civ-card-header" style="position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold);border-radius:3px 0 0 3px;"></div><div class="civ-era">Mesopotamia</div><div class="civ-name">Sumer</div><div class="civ-dates">~4500–1900 BCE</div><div class="civ-desc">The world's first civilization. Invented writing, the wheel, and cities. The Epic of Gilgamesh — history's first great literary work — was written here.</div><span class="civ-region tag-ancient">Middle East</span></div>
+
+    <div class="civ-card"><div class="civ-era">Mesopotamia</div><div class="civ-name">Akkadian Empire</div><div class="civ-dates">~2334–2154 BCE</div><div class="civ-desc">Sargon of Akkad created history's first empire, unifying city-states under a single ruler and establishing the template for all empires to follow.</div><span class="civ-region tag-ancient">Middle East</span></div>
+
+    <div class="civ-card"><div class="civ-era">Mesopotamia</div><div class="civ-name">Babylon</div><div class="civ-dates">~1894–539 BCE</div><div class="civ-desc">City of Hammurabi's code, the Tower of Babel, and the Hanging Gardens. The intellectual and commercial capital of the ancient Middle East for millennia.</div><span class="civ-region tag-ancient">Middle East</span></div>
+
+    <div class="civ-card"><div class="civ-era">North Africa</div><div class="civ-name">Ancient Egypt</div><div class="civ-dates">~3100–30 BCE</div><div class="civ-desc">3,000 years of continuous civilization on the Nile. Pyramids, mummies, hieroglyphs, and pharaohs — one of history's most enduring and recognizable cultures.</div><span class="civ-region tag-ancient">Africa</span></div>
+
+    <div class="civ-card"><div class="civ-era">South Asia</div><div class="civ-name">Indus Valley</div><div class="civ-dates">~3300–1300 BCE</div><div class="civ-desc">Sophisticated planned cities at Mohenjo-daro and Harappa with grid streets, sewage systems, and standardized weights. A civilization still largely undeciphered.</div><span class="civ-region tag-ancient">South Asia</span></div>
+
+    <div class="civ-card"><div class="civ-era">East Asia</div><div class="civ-name">Ancient China</div><div class="civ-dates">~2000 BCE – present</div><div class="civ-desc">The world's longest continuous civilization. Shang, Zhou, Qin, Han, Tang, Song, Ming, Qing — an unbroken thread of culture, philosophy, and innovation.</div><span class="civ-region tag-ancient">East Asia</span></div>
+
+    <div class="civ-card"><div class="civ-era">Middle East</div><div class="civ-name">Persian Empire</div><div class="civ-dates">~550–330 BCE</div><div class="civ-desc">Cyrus the Great's empire stretched from Egypt to India. Known for religious tolerance, sophisticated administration, and the Royal Road connecting the ancient world.</div><span class="civ-region tag-ancient">Middle East</span></div>
+
+    <div class="civ-card"><div class="civ-era">Mediterranean</div><div class="civ-name">Ancient Greece</div><div class="civ-dates">~800–146 BCE</div><div class="civ-desc">Democracy, philosophy, theater, Olympic games, and the foundations of Western science. Athens and Sparta embodied two radically different visions of civilization.</div><span class="civ-region tag-ancient">Europe</span></div>
+
+    <div class="civ-card"><div class="civ-era">Mediterranean</div><div class="civ-name">Roman Empire</div><div class="civ-dates">27 BCE – 476 CE</div><div class="civ-desc">Rome at its height governed 70 million people across three continents. Roman law, engineering, language, and governance shaped every subsequent Western civilization.</div><span class="civ-region tag-ancient">Europe</span></div>
+
+    <div class="civ-card"><div class="civ-era">Eastern Europe</div><div class="civ-name">Byzantine Empire</div><div class="civ-dates">330–1453 CE</div><div class="civ-desc">Rome's eastern continuation survived for 1,100 years after the Western Empire's fall. Constantinople was the largest and most sophisticated city in the medieval world.</div><span class="civ-region tag-medieval">Middle East/Europe</span></div>
+
+    <div class="civ-card"><div class="civ-era">Middle East</div><div class="civ-name">Islamic Golden Age</div><div class="civ-dates">750–1258 CE</div><div class="civ-desc">While Europe struggled through the early medieval period, Islamic scholars preserved and advanced mathematics, astronomy, medicine, and philosophy. The foundation of modern science.</div><span class="civ-region tag-medieval">Middle East</span></div>
+
+    <div class="civ-card"><div class="civ-era">Northern Europe</div><div class="civ-name">Vikings</div><div class="civ-dates">793–1066 CE</div><div class="civ-desc">Norse raiders, traders, and explorers who reached North America 500 years before Columbus. Their longship technology and navigation skills were centuries ahead of their time.</div><span class="civ-region tag-medieval">Europe</span></div>
+
+    <div class="civ-card"><div class="civ-era">Central Asia</div><div class="civ-name">Mongol Empire</div><div class="civ-dates">1206–1368 CE</div><div class="civ-desc">The largest contiguous land empire in history. Genghis Khan's conquests connected East and West through trade and terror, reshaping the demographics of half the world.</div><span class="civ-region tag-medieval">Central Asia</span></div>
+
+    <div class="civ-card"><div class="civ-era">Western Europe</div><div class="civ-name">Renaissance Europe</div><div class="civ-dates">1300–1600 CE</div><div class="civ-desc">The rebirth of classical learning, the age of Leonardo, Michelangelo, and Machiavelli. The printing press democratized knowledge. The world would never be the same.</div><span class="civ-region tag-modern">Europe</span></div>
+
+    <div class="civ-card"><div class="civ-era">Western Europe</div><div class="civ-name">Industrial Revolution</div><div class="civ-dates">1760–1840 CE</div><div class="civ-desc">Steam power, factories, and railways transformed human life more rapidly than any previous change in history. The foundation of the modern world.</div><span class="civ-region tag-modern">Europe</span></div>
+
+    <div class="civ-card"><div class="civ-era">Global</div><div class="civ-name">The Modern Era</div><div class="civ-dates">1900 CE – Present</div><div class="civ-desc">Two world wars, decolonization, the digital revolution, and the Anthropocene. The human story accelerating beyond anything our ancestors could have imagined.</div><span class="civ-region tag-modern">Global</span></div>
+  </div>
+</div>
+</section>
+
+<!-- HISTORICAL FIGURES -->
+<section id="figures">
+<div class="container">
+  <div class="section-label">Historical Figures</div>
+  <h2 class="section-title">Commanders Who Changed History</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">Military leaders whose decisions reshaped civilizations, borders, and the course of human events.</p>
+
+  <div class="figures-grid">
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">A</div>
+        <div class="figure-name">Alexander the Great</div>
+        <div class="figure-dates">356–323 BCE · Macedon</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">Perhaps the greatest military commander in history. By age 32, Alexander had conquered an empire stretching from Greece to northwestern India — never losing a battle.</p>
+        <ul class="figure-achievements">
+          <li>Conquered the Persian Empire — the largest in the world — in just seven years</li>
+          <li>Founded Alexandria, Egypt — one of antiquity's greatest intellectual centers</li>
+          <li>Spread Greek culture (Hellenism) from the Mediterranean to Central Asia</li>
+          <li>Never lost a single battle despite constantly fighting outnumbered</li>
+        </ul>
+        <div class="figure-legacy">His campaigns connected East and West, initiating centuries of cultural exchange that shaped the development of Rome, Islam, and ultimately the modern world.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">H</div>
+        <div class="figure-name">Hannibal Barca</div>
+        <div class="figure-dates">247–183 BCE · Carthage</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">The "Father of Strategy." Hannibal crossed the Alps with elephants and came within a whisker of destroying Rome — forever immortalized by his tactical genius at Cannae.</p>
+        <ul class="figure-achievements">
+          <li>Crossed the Alps in winter with 40,000 troops and war elephants</li>
+          <li>Battle of Trebia, Lake Trasimene, and Cannae — three devastating defeats of Rome</li>
+          <li>Cannae (216 BCE) — his double envelopment killed ~50,000 Romans in hours</li>
+          <li>Spent 15 years campaigning undefeated in Italy</li>
+        </ul>
+        <div class="figure-legacy">Cannae remains the textbook example of tactical encirclement, studied and imitated by military commanders from Schlieffen to Schwarzkopf.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">S</div>
+        <div class="figure-name">Scipio Africanus</div>
+        <div class="figure-dates">235–183 BCE · Rome</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">The Roman general who studied Hannibal's tactics and used them to defeat him. Scipio saved Rome and ended the Second Punic War by taking the fight to Carthage.</p>
+        <ul class="figure-achievements">
+          <li>Conquered Roman Spain from Carthage, cutting Hannibal's supply lines</li>
+          <li>Invaded North Africa, forcing Hannibal to leave Italy</li>
+          <li>Battle of Zama (202 BCE) — defeated Hannibal using the master's own encirclement tactics</li>
+          <li>Earned the title "Africanus" — the first Roman general named after his conquest</li>
+        </ul>
+        <div class="figure-legacy">Scipio proved that Hannibal's tactical genius could be learned and countered — and in doing so, secured Rome's rise to Mediterranean supremacy.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">J</div>
+        <div class="figure-name">Julius Caesar</div>
+        <div class="figure-dates">100–44 BCE · Rome</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">Politician, general, historian, and revolutionary. Caesar conquered Gaul, crossed the Rubicon, and transformed Rome from republic to empire — at the cost of his life.</p>
+        <ul class="figure-achievements">
+          <li>Conquered all of Gaul (modern France and Belgium) in eight years</li>
+          <li>Siege of Alesia (52 BCE) — surrounded a besieging army while being besieged</li>
+          <li>Crossed the Rubicon, triggering civil war that ended the Republic</li>
+          <li>Introduced the Julian calendar, reformed Roman governance</li>
+        </ul>
+        <div class="figure-legacy">Caesar's name became a title — Kaiser, Czar — worn by rulers for two millennia. His assassination sparked a generation of civil war that produced the Roman Empire.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">S</div>
+        <div class="figure-name">Saladin</div>
+        <div class="figure-dates">1137–1193 CE · Egypt/Syria</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">The Kurdish sultan who unified the Islamic world and recaptured Jerusalem from the Crusaders — famous as much for his chivalry toward defeated enemies as for his military genius.</p>
+        <ul class="figure-achievements">
+          <li>Founded the Ayyubid Dynasty, unifying Egypt, Syria, and the Levant</li>
+          <li>Battle of Hattin (1187) — decisive destruction of the Crusader Kingdom of Jerusalem</li>
+          <li>Recaptured Jerusalem after 88 years of Crusader rule</li>
+          <li>Granted mercy to defeated Crusaders — contrasting sharply with the First Crusade's massacres</li>
+        </ul>
+        <div class="figure-legacy">Saladin became a legend not for brutality but for magnanimity — revered by Muslims and Christians alike, a figure who showed that warfare could be conducted with honor.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">G</div>
+        <div class="figure-name">Genghis Khan</div>
+        <div class="figure-dates">1162–1227 CE · Mongolia</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">From a hunted refugee to ruler of the largest land empire in history. Genghis Khan's conquests killed tens of millions — and connected the world in unprecedented ways.</p>
+        <ul class="figure-achievements">
+          <li>Unified warring Mongol tribes — beginning as an escaped slave</li>
+          <li>Conquered northern China, Central Asia, Persia, and reached Eastern Europe</li>
+          <li>Created a meritocratic military system of terrifying effectiveness</li>
+          <li>Established the Pax Mongolica — enabling safe trade from China to Europe</li>
+        </ul>
+        <div class="figure-legacy">Genghis Khan's DNA has been identified in approximately 0.5% of all living humans — a biological testament to the scale of Mongol conquest.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">S</div>
+        <div class="figure-name">Subutai</div>
+        <div class="figure-dates">1175–1248 CE · Mongolia</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">Arguably the greatest military strategist in history — not famous enough. Genghis Khan's most brilliant general led 65 major campaigns and won 65 battles across three continents.</p>
+        <ul class="figure-achievements">
+          <li>Led the great western raid of 1221–1224 — reconnaissance into Russia and Eastern Europe</li>
+          <li>Battle of Mohi (1241) — annihilated the Hungarian army in a masterclass of deception</li>
+          <li>Coordinated simultaneous attacks on targets hundreds of miles apart</li>
+          <li>Undefeated in his entire military career — the most successful general never to lose</li>
+        </ul>
+        <div class="figure-legacy">Subutai's operational genius — particularly his use of feigned retreat, strategic deception, and multi-column coordination — was centuries ahead of its time.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">M</div>
+        <div class="figure-name">Mehmed II</div>
+        <div class="figure-dates">1432–1481 CE · Ottoman Empire</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">"The Conqueror." At 21, he ended the Byzantine Empire that had lasted 1,100 years — using massive artillery against ancient walls. He opened the door to the modern world.</p>
+        <ul class="figure-achievements">
+          <li>Conquered Constantinople in 1453 at age 21, ending the Byzantine Empire</li>
+          <li>Deployed the largest cannons the world had ever seen against Constantinople's walls</li>
+          <li>Transformed the city into Istanbul — a new capital of an Ottoman golden age</li>
+          <li>Spoke six languages and patronized Greek and Italian scholars</li>
+        </ul>
+        <div class="figure-legacy">The fall of Constantinople sent Greek scholars fleeing to Italy — helping spark the Renaissance. Mehmed II thus inadvertently accelerated the intellectual revolution he had hoped to end.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">N</div>
+        <div class="figure-name">Napoleon Bonaparte</div>
+        <div class="figure-dates">1769–1821 CE · France</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">The most complete soldier-statesman in modern history. Napoleon revolutionized warfare, law, and European governance — until overreach brought total collapse.</p>
+        <ul class="figure-achievements">
+          <li>Rose from Corsican artillery officer to Emperor of France</li>
+          <li>Austerlitz (1805) — widely considered the most perfect battle ever fought</li>
+          <li>Introduced the Napoleonic Code — still the basis of law in dozens of countries</li>
+          <li>Fought and won more battles than Caesar, Alexander, and Hannibal combined</li>
+        </ul>
+        <div class="figure-legacy">Napoleon's legal reforms outlasted his empire by two centuries. The Napoleonic Code shaped the legal systems of France, Belgium, Quebec, Louisiana, and Latin America.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">W</div>
+        <div class="figure-name">Duke of Wellington</div>
+        <div class="figure-dates">1769–1852 CE · Britain</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">The man who stopped Napoleon. "The Iron Duke" was never defeated in a major battle, preferring defensive mastery and logistics to Napoleonic flair.</p>
+        <ul class="figure-achievements">
+          <li>Won every major campaign in India, Portugal, Spain, and France (1799–1815)</li>
+          <li>Waterloo (1815) — held Napoleon's assaults until Prussian reinforcements arrived</li>
+          <li>Later became Prime Minister of Britain (1828–1830)</li>
+          <li>Mastered logistics — "An army marches on its stomach"</li>
+        </ul>
+        <div class="figure-legacy">Wellington's defensive genius at Waterloo ended the Napoleonic Wars and established a century of British-dominated European order — the Pax Britannica.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">R</div>
+        <div class="figure-name">Erwin Rommel</div>
+        <div class="figure-dates">1891–1944 CE · Germany</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">The "Desert Fox." Rommel's North African campaign made him a legend on both sides of the war — admired even by Churchill and Eisenhower for his audacity and tactical brilliance.</p>
+        <ul class="figure-achievements">
+          <li>Led 7th Panzer Division across France in 1940 with startling speed</li>
+          <li>North African campaigns 1941–1942 — repeatedly outfought larger Allied forces</li>
+          <li>Forced the fall of Tobruk (1942) — Britain's greatest colonial humiliation</li>
+          <li>Later involved in the July 1944 plot against Hitler; forced to commit suicide</li>
+        </ul>
+        <div class="figure-legacy">Rommel's rapid armored tactics influenced post-war military doctrine. His honorable conduct toward prisoners and moral courage at the end of his life distinguished him from many contemporaries.</div>
+      </div>
+    </div>
+
+    <div class="figure-card">
+      <div class="figure-header">
+        <div class="figure-avatar">Z</div>
+        <div class="figure-name">Georgy Zhukov</div>
+        <div class="figure-dates">1896–1974 CE · Soviet Union</div>
+      </div>
+      <div class="figure-body">
+        <p class="figure-bio">The man who saved the Soviet Union — and arguably the world. Zhukov commanded at Moscow, Stalingrad, Kursk, and Berlin. No other commander in WWII won on such a scale.</p>
+        <ul class="figure-achievements">
+          <li>Halted German advance at Moscow (1941) — saving the Soviet state</li>
+          <li>Coordinated the destruction of German 6th Army at Stalingrad (1942–43)</li>
+          <li>Directed the Red Army at Kursk — the largest tank battle in history</li>
+          <li>Led the final assault on Berlin (1945)</li>
+        </ul>
+        <div class="figure-legacy">Zhukov never lost a major battle. The Soviet victory in World War II — which was decisive in defeating Nazi Germany — was built on his operational genius and iron will.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- BATTLES -->
+<section id="battles">
+<div class="container">
+  <div class="section-label">Military History</div>
+  <h2 class="section-title">Battles That Changed the World</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">From chariot warfare to armored divisions — the engagements that redirected civilizations.</p>
+
+  <div class="battles-table-wrap">
+    <table class="battles-table">
+      <thead>
+        <tr>
+          <th>Battle</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Commanders</th>
+          <th>Outcome</th>
+          <th>Historical Significance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Kadesh</td><td class="date-col">1274 BCE</td><td>Syria</td><td>Ramesses II vs. Muwatalli II</td><td><span class="outcome-badge" style="background:rgba(201,168,76,0.15);color:var(--gold)">Draw / Treaty</span></td><td>First recorded peace treaty in history</td></tr>
+        <tr><td>Marathon</td><td class="date-col">490 BCE</td><td>Greece</td><td>Miltiades vs. Datis</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Greek Victory</span></td><td>Saved Athenian democracy from Persian conquest</td></tr>
+        <tr><td>Thermopylae</td><td class="date-col">480 BCE</td><td>Greece</td><td>Leonidas vs. Xerxes</td><td><span class="outcome-badge" style="background:rgba(232,69,69,0.15);color:#f87171">Greek Defeat</span></td><td>Immortalized sacrifice for freedom; delayed Persians</td></tr>
+        <tr><td>Salamis</td><td class="date-col">480 BCE</td><td>Greece</td><td>Themistocles vs. Xerxes</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Greek Victory</span></td><td>Naval genius destroyed Persian fleet; ended invasion</td></tr>
+        <tr><td>Plataea</td><td class="date-col">479 BCE</td><td>Greece</td><td>Pausanias vs. Mardonius</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Greek Victory</span></td><td>Final defeat of Persian land invasion of Greece</td></tr>
+        <tr><td>Granicus</td><td class="date-col">334 BCE</td><td>Turkey</td><td>Alexander vs. Persian satraps</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Macedonian Victory</span></td><td>Alexander's first battle — opened Persian heartland</td></tr>
+        <tr><td>Issus</td><td class="date-col">333 BCE</td><td>Turkey</td><td>Alexander vs. Darius III</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Macedonian Victory</span></td><td>First meeting of Alexander and Darius; Persia broken</td></tr>
+        <tr><td>Gaugamela</td><td class="date-col">331 BCE</td><td>Iraq</td><td>Alexander vs. Darius III</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Macedonian Victory</span></td><td>End of the Persian Empire; Alexander controls the East</td></tr>
+        <tr><td>Hydaspes</td><td class="date-col">326 BCE</td><td>India</td><td>Alexander vs. Porus</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Macedonian Victory</span></td><td>Alexander's final great battle; his army refuses to go further</td></tr>
+        <tr><td>Cannae</td><td class="date-col">216 BCE</td><td>Italy</td><td>Hannibal vs. Varro/Paullus</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Carthaginian Victory</span></td><td>Greatest tactical defeat in Roman history; ~50,000 killed</td></tr>
+        <tr><td>Alesia</td><td class="date-col">52 BCE</td><td>France</td><td>Caesar vs. Vercingetorix</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Roman Victory</span></td><td>End of Gallic resistance; Gaul becomes Roman</td></tr>
+        <tr><td>Actium</td><td class="date-col">31 BCE</td><td>Greece</td><td>Augustus vs. Antony/Cleopatra</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Augustan Victory</span></td><td>End of Roman Republic; birth of the Roman Empire</td></tr>
+        <tr><td>Tours / Poitiers</td><td class="date-col">732 CE</td><td>France</td><td>Charles Martel vs. Abd al-Rahman</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Frankish Victory</span></td><td>Halted Islamic advance into Western Europe</td></tr>
+        <tr><td>Hastings</td><td class="date-col">1066 CE</td><td>England</td><td>William vs. Harold II</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Norman Victory</span></td><td>Norman Conquest transformed England permanently</td></tr>
+        <tr><td>Hattin</td><td class="date-col">1187 CE</td><td>Israel</td><td>Saladin vs. Guy of Lusignan</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Muslim Victory</span></td><td>Crusader Kingdom destroyed; Jerusalem recaptured</td></tr>
+        <tr><td>Agincourt</td><td class="date-col">1415 CE</td><td>France</td><td>Henry V vs. d'Albret</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">English Victory</span></td><td>English longbow devastates French chivalry</td></tr>
+        <tr><td>Fall of Constantinople</td><td class="date-col">1453 CE</td><td>Turkey</td><td>Mehmed II vs. Constantine XI</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Ottoman Victory</span></td><td>End of Byzantine Empire; medieval era closes</td></tr>
+        <tr><td>Lepanto</td><td class="date-col">1571 CE</td><td>Greece</td><td>Holy League vs. Ottoman Empire</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Holy League Victory</span></td><td>Ended Ottoman naval supremacy in the Mediterranean</td></tr>
+        <tr><td>Austerlitz</td><td class="date-col">1805 CE</td><td>Czech Republic</td><td>Napoleon vs. Alexander I / Francis II</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">French Victory</span></td><td>Napoleon's masterpiece; Third Coalition shattered</td></tr>
+        <tr><td>Borodino</td><td class="date-col">1812 CE</td><td>Russia</td><td>Napoleon vs. Kutuzov</td><td><span class="outcome-badge" style="background:rgba(201,168,76,0.15);color:var(--gold)">Pyrrhic French Victory</span></td><td>Bloodiest day of Napoleonic Wars; Moscow taken but Russia not</td></tr>
+        <tr><td>Waterloo</td><td class="date-col">1815 CE</td><td>Belgium</td><td>Wellington / Blücher vs. Napoleon</td><td><span class="outcome-badge" style="background:rgba(232,69,69,0.15);color:#f87171">French Defeat</span></td><td>End of Napoleon; 100 years of European order established</td></tr>
+        <tr><td>Gettysburg</td><td class="date-col">1863 CE</td><td>Pennsylvania, USA</td><td>Meade vs. Lee</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Union Victory</span></td><td>Turning point of the American Civil War</td></tr>
+        <tr><td>Verdun</td><td class="date-col">1916 CE</td><td>France</td><td>Pétain vs. Falkenhayn</td><td><span class="outcome-badge" style="background:rgba(201,168,76,0.15);color:var(--gold)">Strategic Draw</span></td><td>300,000 dead; the horror of industrial warfare laid bare</td></tr>
+        <tr><td>Somme</td><td class="date-col">1916 CE</td><td>France</td><td>Haig vs. Falkenhayn</td><td><span class="outcome-badge" style="background:rgba(201,168,76,0.15);color:var(--gold)">Strategic Draw</span></td><td>60,000 British casualties on day one; war's futility exposed</td></tr>
+        <tr><td>Midway</td><td class="date-col">1942 CE</td><td>Pacific Ocean</td><td>Nimitz vs. Yamamoto</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">American Victory</span></td><td>Turning point of Pacific War; Japan never recovered</td></tr>
+        <tr><td>El Alamein</td><td class="date-col">1942 CE</td><td>Egypt</td><td>Montgomery vs. Rommel</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Allied Victory</span></td><td>End of Axis threat to Egypt and Suez Canal</td></tr>
+        <tr><td>Stalingrad</td><td class="date-col">1942–43 CE</td><td>Russia</td><td>Zhukov / Rokossovsky vs. Paulus</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Soviet Victory</span></td><td>Bloodiest battle in history; Germany's strategic turning point</td></tr>
+        <tr><td>Kursk</td><td class="date-col">1943 CE</td><td>Russia</td><td>Rokossovsky / Vatutin vs. von Manstein</td><td><span class="outcome-badge" style="background:rgba(34,197,94,0.15);color:var(--accent-green)">Soviet Victory</span></td><td>Largest tank battle in history; Germany permanently on the defensive</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</section>
+
+<!-- ANCIENT AMERICAS -->
+<section id="americas">
+<div class="container">
+  <div class="section-label">Ancient Americas</div>
+  <h2 class="section-title">Ancient Americas: New Discoveries</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">LiDAR technology is revealing pre-Columbian civilizations of a scale and sophistication that rewrites everything we thought we knew about the Americas.</p>
+
+  <div class="highlight-banner" style="border-color:rgba(34,197,94,0.3);background:linear-gradient(135deg, rgba(34,197,94,0.05) 0%, rgba(74,158,255,0.04) 100%);">
+    <div class="hb-icon">🛸</div>
+    <div class="hb-text">
+      <h4 style="color:var(--accent-green)">LiDAR Is Rewriting History</h4>
+      <p>Laser-based aerial scanning technology is penetrating forest canopy to reveal massive urban networks, road systems, and earthworks invisible to the naked eye. The Amazon alone may have housed millions of people in complex civilizations we are only beginning to understand.</p>
+    </div>
+  </div>
+
+  <div class="americas-grid">
+    <div class="americas-text">
+      <h3>Amazon Geometric Earthworks</h3>
+      <p>For centuries, scholars assumed the Amazon rainforest was a pristine wilderness too hostile for large-scale civilization. LiDAR has proved them catastrophically wrong. Geometric earthworks — perfectly formed squares, circles, and hexagons stretching across hundreds of acres — have been found beneath the forest floor across Brazil, Bolivia, and beyond.</p>
+      <p>These aren't random earthworks. They are organized, large-scale constructions requiring thousands of workers and sophisticated planning. Their purpose remains debated — defensive works, ceremonial spaces, land management? — but their existence proves beyond doubt that a complex civilization lived here.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;">
+        <div class="img-placeholder" style="min-height:180px;"><div class="img-placeholder-icon">🛸</div><p>Aerial LiDAR visualization showing geometric earthworks beneath the Amazon rainforest</p></div>
+        <div class="img-placeholder" style="min-height:180px;"><div class="img-placeholder-icon">🏙️</div><p>Artist reconstruction of large pre-Columbian settlements hidden within the Amazon basin</p></div>
+      </div>
+    </div>
+    <div>
+      <div class="lidar-box">
+        <h4>What LiDAR Has Found in the Amazon</h4>
+        <ul class="discovery-list">
+          <li>Thousands of geometric earthworks — squares, circles, hexagons — across Brazil and Bolivia</li>
+          <li>Urban networks potentially housing millions of people in interconnected cities</li>
+          <li>Ancient road systems connecting settlements across hundreds of kilometers</li>
+          <li>Evidence of sophisticated environmental engineering — terraforming the forest</li>
+          <li>Terra preta (dark earth) soils — deliberately created to enable agriculture in poor Amazonian soil</li>
+          <li>Causeways, reservoirs, fish ponds, and canal systems</li>
+          <li>Fortified settlements with complex defensive earthworks</li>
+          <li>Possible sacred landscapes aligned with astronomical observations</li>
+        </ul>
+      </div>
+      <div class="img-placeholder" style="min-height:160px;margin-top:1rem;"><div class="img-placeholder-icon">🌿</div><p>Amazon geometric earthworks viewed from above — aerial photograph showing scale</p></div>
+    </div>
+  </div>
+
+  <div style="margin-top:3rem;">
+    <h3 class="section-title" style="font-size:1.5rem;margin-bottom:1.5rem;">North American Monuments</h3>
+    <div class="na-sites">
+      <div class="na-site">
+        <div class="na-site-img"><div class="img-placeholder" style="border-radius:0;min-height:160px;"><div class="img-placeholder-icon">🐍</div><p>Aerial view of Serpent Mound in Ohio</p></div></div>
+        <div class="na-site-body">
+          <div class="na-site-name">Serpent Mound</div>
+          <div class="na-site-loc">Ohio, USA · ~1000 CE (Adena culture elements older)</div>
+          <p class="na-site-desc">A 1,348-foot effigy mound in the shape of an uncoiling serpent with an oval shape at its head. Aligned with astronomical events, built by the Fort Ancient culture over older Adena earthworks. One of the most enigmatic monuments in North America.</p>
+        </div>
+      </div>
+
+      <div class="na-site">
+        <div class="na-site-img"><div class="img-placeholder" style="border-radius:0;min-height:160px;"><div class="img-placeholder-icon">🏙️</div><p>Artist reconstruction of Cahokia at its height, ~1100 CE</p></div></div>
+        <div class="na-site-body">
+          <div class="na-site-name">Cahokia</div>
+          <div class="na-site-loc">Illinois, USA · 600–1400 CE</div>
+          <p class="na-site-desc">At its peak around 1100 CE, Cahokia was larger than contemporary London. A city of 10,000–20,000 people with massive earthen mounds, plazas, and a solar calendar (Woodhenge). The largest pre-Columbian city north of Mexico.</p>
+        </div>
+      </div>
+
+      <div class="na-site">
+        <div class="na-site-img"><div class="img-placeholder" style="border-radius:0;min-height:160px;"><div class="img-placeholder-icon">🏜️</div><p>Chaco Canyon great houses and ancient road system</p></div></div>
+        <div class="na-site-body">
+          <div class="na-site-name">Chaco Canyon</div>
+          <div class="na-site-loc">New Mexico, USA · 850–1150 CE</div>
+          <p class="na-site-desc">A major ceremonial and trade center of the Ancestral Puebloan people. Massive great houses like Pueblo Bonito contain hundreds of rooms. Ancient roads extending hundreds of miles suggest a vast regional network centered here.</p>
+        </div>
+      </div>
+
+      <div class="na-site">
+        <div class="na-site-body" style="padding-top:1.25rem;">
+          <div class="na-site-name">Poverty Point</div>
+          <div class="na-site-loc">Louisiana, USA · 1700–1100 BCE</div>
+          <p class="na-site-desc">A massive earthwork complex built 3,700 years ago — among the oldest in North America. Six concentric ridges form a massive C-shape visible from the air. Built by hunter-gatherers with no agriculture — challenging our assumptions about what hunter-gatherers could achieve.</p>
+        </div>
+      </div>
+
+      <div class="na-site">
+        <div class="na-site-body" style="padding-top:1.25rem;">
+          <div class="na-site-name">Hopewell Earthworks</div>
+          <div class="na-site-loc">Ohio, USA · 100 BCE – 500 CE</div>
+          <p class="na-site-desc">An extraordinary network of geometric earthworks, mounds, and enclosures across the Ohio River valley. Copper, mica, obsidian, and other materials found here came from across the continent — evidence of a vast trade network.</p>
+        </div>
+      </div>
+
+      <div class="na-site">
+        <div class="na-site-body" style="padding-top:1.25rem;">
+          <div class="na-site-name">Adena Culture</div>
+          <div class="na-site-loc">Ohio River Valley · 500 BCE – 100 CE</div>
+          <p class="na-site-desc">One of the earliest mound-building cultures of the Eastern Woodlands. The Grave Creek Mound in West Virginia — one of the largest Adena structures — stands 62 feet high and is 240 feet in diameter, containing the remains of elite individuals with elaborate burial goods.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- DISCOVERIES CHANGING HISTORY -->
+<section id="discoveries">
+<div class="container">
+  <div class="section-label">Archaeology Rewriting History</div>
+  <h2 class="section-title">Discoveries That Changed Everything</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">History is not a finished product. These discoveries overturned decades of scholarly consensus and forced a complete rethinking of human origins, migrations, and civilizations.</p>
+
+  <div class="discovery-cards">
+    <div class="discovery-card">
+      <div class="dc-year">1994 — Ongoing</div>
+      <div class="dc-title">Göbekli Tepe</div>
+      <div class="dc-what">Systematic excavation reveals a monumental complex built by hunter-gatherers 11,600 years ago — 6,000 years before Stonehenge. T-shaped pillars up to 5.5m tall carved with extraordinary animal reliefs.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>Complex organized society and monumental architecture predate agriculture. The entire narrative of civilization's origins must be revised.</div>
+    </div>
+
+    <div class="discovery-card">
+      <div class="dc-year">2010s–2020s</div>
+      <div class="dc-title">Karahan Tepe & Taş Tepeler</div>
+      <div class="dc-what">A network of Göbekli Tepe-era sites across southeastern Turkey reveals not an isolated anomaly but a widespread Neolithic ceremonial culture. Karahan Tepe's human-head pillars are unlike anything seen before.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>Göbekli Tepe was not a fluke. There was an entire civilization of monument builders predating everything we call civilization.</div>
+    </div>
+
+    <div class="discovery-card">
+      <div class="dc-year">2010s–2020s</div>
+      <div class="dc-title">Amazon Urban Settlements</div>
+      <div class="dc-what">LiDAR reveals networks of cities, roads, earthworks, and engineered landscapes beneath the Amazon rainforest. The "pristine wilderness" was actually one of the most densely populated regions on Earth before 1492.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>The Amazon housed civilizations of millions. The "empty wilderness" European explorers described was a post-collapse landscape — after 90% of the population died from introduced disease.</div>
+    </div>
+
+    <div class="discovery-card">
+      <div class="dc-year">2000s–2020s</div>
+      <div class="dc-title">Ancient DNA Revolution</div>
+      <div class="dc-what">DNA extracted from ancient bones reveals mass migrations, population replacements, and interbreeding events completely invisible in the archaeological record. Neanderthals and Denisovans contributed DNA to modern humans. The original Europeans were replaced.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>Human prehistory was far more dynamic, violent, and interconnected than we imagined. Every human population is the result of multiple waves of migration and replacement.</div>
+    </div>
+
+    <div class="discovery-card">
+      <div class="dc-year">2010s–2020s</div>
+      <div class="dc-title">Maya Cities via LiDAR</div>
+      <div class="dc-what">LiDAR scanning over Guatemala and other Maya regions reveals tens of thousands of previously unknown structures — suggesting the Maya lowlands were far more densely populated than estimated. Cities like Caracol are revealed to be vast metropolitan areas.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>Classic Maya population estimates must double or triple. The collapse of Maya civilization was the collapse of one of history's most densely populated regions.</div>
+    </div>
+
+    <div class="discovery-card">
+      <div class="dc-year">Ongoing</div>
+      <div class="dc-title">Underwater Archaeology</div>
+      <div class="dc-what">As sea levels were 120 meters lower during the last Ice Age, vast areas of continental shelf were inhabited coastlines. Submerged sites off the coasts of India, the North Sea, and elsewhere are revealing lost civilizations of the Mesolithic world.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>The earliest human coastal civilizations — likely the most numerous and important — are hidden beneath the ocean. We have seen almost none of them.</div>
+    </div>
+
+    <div class="discovery-card">
+      <div class="dc-year">2000s–2020s</div>
+      <div class="dc-title">Ice Age Migration Complexity</div>
+      <div class="dc-what">Ancient DNA and new fossil finds reveal the peopling of the Americas involved multiple waves of migration via different routes — the Beringian land bridge, the kelp highway coast route, and possibly trans-Pacific routes far more complex than the simple single-migration model.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>The Americas were peopled over thousands of years by multiple distinct populations. The story of who the first Americans were remains actively contested.</div>
+    </div>
+
+    <div class="discovery-card">
+      <div class="dc-year">1990s–2020s</div>
+      <div class="dc-title">Ancient Trade Networks</div>
+      <div class="dc-what">Chemical analysis of Bronze Age artifacts reveals copper from Cyprus in Scandinavia, tin from Afghanistan in Egypt, obsidian from Anatolia in Britain. The ancient world was far more connected than we imagined — a global trading system existed 3,500 years ago.</div>
+      <div class="dc-impact"><div class="dc-impact-label">How It Changed History</div>The "Dark Ages" after the Bronze Age Collapse (~1200 BCE) collapsed a genuinely global trade system. What we call "isolated" ancient civilizations were deeply interconnected.</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- MAPS -->
+<section id="maps" style="background:var(--bg2);">
+<div class="container">
+  <div class="section-label">Interactive Maps</div>
+  <h2 class="section-title">Campaign & Exploration Maps</h2>
+  <div class="gold-line"></div>
+  <p class="section-sub">Future interactive maps tracking the movements of armies, empires, and explorers across history.</p>
+
+  <div class="maps-grid">
+    <div class="map-placeholder"><div class="map-ph-header"><div class="map-ph-title">Alexander's Campaigns</div><div class="map-ph-sub">334–323 BCE · Greece to India</div></div><div class="map-ph-visual"><span style="font-size:2rem">🗺️</span><span>Interactive map coming soon</span><span style="font-size:0.65rem;color:var(--gray2)">Granicus → Issus → Gaugamela → Persepolis → Hydaspes</span></div></div>
+    <div class="map-placeholder"><div class="map-ph-header"><div class="map-ph-title">Roman Expansion</div><div class="map-ph-sub">509 BCE – 117 CE</div></div><div class="map-ph-visual"><span style="font-size:2rem">🗺️</span><span>Interactive map coming soon</span><span style="font-size:0.65rem;color:var(--gray2)">Italy → Mediterranean → Gaul → Britain → Dacia</span></div></div>
+    <div class="map-placeholder"><div class="map-ph-header"><div class="map-ph-title">Silk Road Routes</div><div class="map-ph-sub">2nd Century BCE – 15th Century CE</div></div><div class="map-ph-visual"><span style="font-size:2rem">🗺️</span><span>Interactive map coming soon</span><span style="font-size:0.65rem;color:var(--gray2)">Chang'an → Samarkand → Constantinople → Rome</span></div></div>
+    <div class="map-placeholder"><div class="map-ph-header"><div class="map-ph-title">Mongol Empire Expansion</div><div class="map-ph-sub">1206–1294 CE</div></div><div class="map-ph-visual"><span style="font-size:2rem">🗺️</span><span>Interactive map coming soon</span><span style="font-size:0.65rem;color:var(--gray2)">Mongolia → China → Persia → Russia → Poland</span></div></div>
+    <div class="map-placeholder"><div class="map-ph-header"><div class="map-ph-title">Age of Exploration</div><div class="map-ph-sub">1415–1600 CE</div></div><div class="map-ph-visual"><span style="font-size:2rem">🗺️</span><span>Interactive map coming soon</span><span style="font-size:0.65rem;color:var(--gray2)">Columbus → Vasco da Gama → Magellan → Drake</span></div></div>
+    <div class="map-placeholder"><div class="map-ph-header"><div class="map-ph-title">Archaeological Discoveries</div><div class="map-ph-sub">1800 CE – Present</div></div><div class="map-ph-visual"><span style="font-size:2rem">🗺️</span><span>Interactive map coming soon</span><span style="font-size:0.65rem;color:var(--gray2)">Göbekli Tepe · Mohenjo-daro · Machu Picchu · Pompeii</span></div></div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">THE TIMELINE OF CIVILIZATION</div>
+    <div class="footer-sub">A Modern Museum-Quality Historical Experience</div>
+    <ul class="footer-links">
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#what-else">What Else?</a></li>
+      <li><a href="#first-temples">First Temples</a></li>
+      <li><a href="#great-debate">Great Debate</a></li>
+      <li><a href="#my-visit">My Visit</a></li>
+      <li><a href="#civilizations">Civilizations</a></li>
+      <li><a href="#figures">Figures</a></li>
+      <li><a href="#battles">Battles</a></li>
+      <li><a href="#americas">Americas</a></li>
+      <li><a href="#discoveries">Discoveries</a></li>
+      <li><a href="#maps">Maps</a></li>
+    </ul>
+    <p class="footer-copy">History is not finished. Major discoveries are still being made today.</p>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ===== MODAL DATA =====
+const modalData = {
+  sapiens: {
+    date: "~300,000 BCE",
+    title: "Earliest Homo Sapiens",
+    content: `<p>Fossils discovered at Jebel Irhoud in Morocco in 2017 pushed back the emergence of anatomically modern humans by 100,000 years — to approximately 300,000 BCE. This discovery fundamentally altered the story of human origins.</p>
+    <h4>Key Facts</h4>
+    <ul>
+      <li>Jebel Irhoud remains show a mosaic of archaic and modern features</li>
+      <li>The face is essentially modern, but the braincase is more elongated — evolution was still ongoing</li>
+      <li>Multiple individuals found together, suggesting social living</li>
+      <li>Stone tools and evidence of fire use found at the site</li>
+    </ul>
+    <h4>What This Means</h4>
+    <p>Homo sapiens did not emerge suddenly in one place. Our species evolved gradually across Africa, likely with different populations evolving modern features at different times and exchanging genes across the continent. We are the product of pan-African evolution, not a single "cradle of humanity."</p>`
+  },
+  gobekli: {
+    date: "~9600 BCE",
+    title: "Göbekli Tepe — The Site That Rewrote History",
+    content: `<p>In 1994, German archaeologist Klaus Schmidt began excavating a site in southeastern Turkey that would overturn everything archaeologists thought they knew about the origins of civilization.</p>
+    <h4>What Was Found</h4>
+    <ul>
+      <li>At least 20 circular enclosures, each ringed by massive T-shaped limestone pillars</li>
+      <li>Pillars up to 5.5 meters tall, weighing up to 10 tons</li>
+      <li>Elaborately carved animals: foxes, snakes, vultures, cranes, boars, spiders, scorpions</li>
+      <li>Possible abstract symbols and anthropomorphic figures</li>
+      <li>No evidence of permanent habitation — no hearths, no dwellings, no rubbish dumps</li>
+    </ul>
+    <h4>Why It Matters</h4>
+    <p>This site was built 7,000 years before the Great Pyramid and 6,000 years before Stonehenge — by hunter-gatherers who had not yet invented agriculture. Everything we thought required civilization — monumental architecture, organized labor, symbolic art — apparently preceded it.</p>
+    <h4>The Mystery</h4>
+    <p>Around 8,000 BCE, the site was deliberately filled in. The builders carefully buried their own creation under tons of rubble. Why? We don't know. This may be the most tantalizing unsolved mystery in all of archaeology.</p>`
+  },
+  kadesh: {
+    date: "1274 BCE",
+    title: "Battle of Kadesh",
+    content: `<p>The largest chariot battle in history, fought between Egypt under Ramesses II and the Hittite Empire under Muwatalli II near the Syrian city of Kadesh. Both sides claimed victory; neither decisively won.</p>
+    <h4>The Battle</h4>
+    <ul>
+      <li>Estimated 5,000–6,000 chariots engaged on both sides</li>
+      <li>Ramesses was nearly captured after advancing into a Hittite ambush</li>
+      <li>Egyptian accounts (and Ramesses' own propaganda) claim a glorious victory</li>
+      <li>Hittite accounts suggest the opposite</li>
+      <li>The strategic result was a stalemate</li>
+    </ul>
+    <h4>Historical Significance</h4>
+    <p>The Treaty of Kadesh, signed in ~1259 BCE, is the oldest known peace treaty in human history. A copy survives in the Istanbul Archaeological Museum; another hangs at the United Nations Headquarters as a symbol of international diplomacy.</p>`
+  },
+  marathon: {
+    date: "490 BCE",
+    title: "Battle of Marathon",
+    content: `<p>The battle that saved Western civilization, or so the Greeks believed. An Athenian force of about 10,000 men, under the command of Miltiades, defeated a Persian invasion force potentially twice their size on the plain of Marathon northeast of Athens.</p>
+    <h4>The Battle</h4>
+    <ul>
+      <li>Athenians reinforced by 1,000 Plataeans; the Spartans arrived too late</li>
+      <li>Miltiades weakened his center to strengthen the wings</li>
+      <li>The wings crashed through the Persian flanks and then turned inward</li>
+      <li>Persian casualties: ~6,400; Athenian casualties: 192</li>
+    </ul>
+    <h4>The Legend</h4>
+    <p>A runner named Pheidippides reportedly ran the 26 miles from Marathon to Athens to announce the victory — then collapsed and died. The modern marathon commemorates this legendary run. The battle itself became a foundational myth of Greek identity and the possibility of free men defeating a tyrannical empire.</p>`
+  },
+  thermopylae: {
+    date: "480 BCE",
+    title: "Battle of Thermopylae",
+    content: `<p>Three hundred Spartans, along with approximately 7,000 other Greeks, held the narrow coastal pass of Thermopylae against the enormous Persian army of Xerxes for three days in August 480 BCE.</p>
+    <h4>The Battle</h4>
+    <ul>
+      <li>Leonidas chose the narrow pass to neutralize Persian numerical advantage</li>
+      <li>Persian attacks on Days 1 and 2 were repelled with heavy losses</li>
+      <li>On Day 3, a Greek traitor (Ephialtes) revealed a mountain path that outflanked the position</li>
+      <li>Leonidas dismissed most of the Greek army and stayed with 300 Spartans and ~1,100 others to die</li>
+    </ul>
+    <h4>Legacy</h4>
+    <p>Thermopylae became the defining symbol of sacrifice for freedom in Western civilization. The epitaph attributed to the site: "Go tell the Spartans, stranger passing by, that here obedient to their laws we lie." The stand delayed the Persian advance and helped inspire the Greek victories at Salamis and Plataea that followed.</p>`
+  },
+  gaugamela: {
+    date: "331 BCE",
+    title: "Battle of Gaugamela",
+    content: `<p>The decisive battle of Alexander the Great's campaigns — the engagement that ended the Persian Empire. On a flat plain in what is now northern Iraq, Darius III assembled the largest army the ancient world had ever seen. Alexander destroyed it.</p>
+    <h4>The Battle</h4>
+    <ul>
+      <li>Darius leveled the plain to give his scythe chariots maximum effect</li>
+      <li>Alexander created a gap in his own line, drawing in Persian forces</li>
+      <li>He then led his Companion cavalry in a direct charge at Darius himself</li>
+      <li>Darius fled; his army collapsed</li>
+      <li>Alexander lost perhaps 1,000 men; Persian casualties numbered in the tens of thousands</li>
+    </ul>
+    <h4>The Aftermath</h4>
+    <p>After Gaugamela, Alexander captured Babylon, Susa, and Persepolis — the heart of the Persian Empire. The entire vast Persian world — from Egypt to modern Pakistan — fell to a Macedonian army that had left home just three years earlier.</p>`
+  },
+  cannae: {
+    date: "216 BCE",
+    title: "Battle of Cannae",
+    content: `<p>The most studied battle in military history. Hannibal's victory at Cannae killed approximately 50,000 Roman soldiers — nearly a quarter of Rome's entire army — in a single afternoon through a tactical masterpiece of double envelopment.</p>
+    <h4>The Tactical Genius</h4>
+    <ul>
+      <li>Hannibal deliberately placed his weakest troops (Gauls and Spanish) in the center</li>
+      <li>His strongest troops (African veterans) anchored the flanks</li>
+      <li>The center bowed backwards under Roman pressure — drawing them in</li>
+      <li>The flanks crushed the Roman cavalry, then turned inward</li>
+      <li>The Roman army was enveloped on all sides and slaughtered</li>
+    </ul>
+    <h4>Legacy</h4>
+    <p>Cannae gave military history the concept of "annihilation by encirclement." Every commander who has attempted a double envelopment — from Schlieffen's plan for WWI to the Gulf War's "left hook" — was consciously or unconsciously imitating Hannibal at Cannae. It is still required reading at West Point, Sandhurst, and Saint-Cyr.</p>`
+  },
+  tours: {
+    date: "732 CE",
+    title: "Battle of Tours (Battle of Poitiers)",
+    content: `<p>Charles Martel ("The Hammer") of the Franks defeated an Umayyad raiding force under Abdul Rahman Al Ghafiqi between Tours and Poitiers in central France, halting the northward expansion of the Umayyad Caliphate into Western Europe.</p>
+    <h4>The Battle</h4>
+    <ul>
+      <li>Martel assembled a largely infantry force on a wooded hill</li>
+      <li>The Umayyad cavalry charged repeatedly but could not break the Frankish shield wall</li>
+      <li>Abd al-Rahman was killed during the battle</li>
+      <li>The Umayyad forces withdrew and eventually retreated south of the Pyrenees</li>
+    </ul>
+    <h4>Historical Debate</h4>
+    <p>Historians debate the battle's true significance. Some argue it was decisive — that a Frankish defeat would have opened Western Europe to Islamic rule. Others argue the Umayyads had already reached their practical limits of expansion and would have retreated regardless. Edward Gibbon famously speculated that had Martel lost, Islam might have reached the Rhine and Oxford would have been teaching the Quran.</p>`
+  },
+  hastings: {
+    date: "1066 CE",
+    title: "Battle of Hastings",
+    content: `<p>Perhaps the most consequential battle in English history. William, Duke of Normandy, defeated and killed the English King Harold II, ending the Anglo-Saxon era and beginning the Norman transformation of England.</p>
+    <h4>The Battle</h4>
+    <ul>
+      <li>Harold had just defeated the Norwegian Viking Harald Hardrada at Stamford Bridge (September 25)</li>
+      <li>He rushed south with an exhausted army to face William</li>
+      <li>The English held a strong defensive position on Senlac Hill</li>
+      <li>Norman cavalry and archers finally broke the shield wall after hours of fighting</li>
+      <li>Harold was killed — tradition says by an arrow through the eye</li>
+    </ul>
+    <h4>Consequences</h4>
+    <p>The Norman Conquest transformed England utterly. The English language absorbed thousands of French words. English law, architecture, church, and aristocracy were fundamentally altered. Modern English is largely a Norman French overlay on an Anglo-Saxon base — a linguistic legacy of October 14, 1066.</p>`
+  },
+  constantinople: {
+    date: "May 29, 1453 CE",
+    title: "Fall of Constantinople",
+    content: `<p>After 53 days of siege, Ottoman Sultan Mehmed II's forces breached the Theodosian Walls and captured Constantinople, ending the Byzantine Empire that had survived for 1,100 years since the fall of Rome.</p>
+    <h4>The Siege</h4>
+    <ul>
+      <li>Mehmed deployed massive cannons — including the "Basilic," an 8-meter bronze monster firing 545kg stone balls</li>
+      <li>The Ottomans transported 70 ships overland to bypass the chain blocking the Golden Horn</li>
+      <li>Constantine XI refused offers of safe passage and died fighting at the walls</li>
+      <li>The city fell on May 29, 1453 — the last Roman Emperor died defending his city</li>
+    </ul>
+    <h4>The Renaissance Connection</h4>
+    <p>Greek scholars fleeing the fall of Constantinople carried ancient manuscripts to Italy — contributing to the intellectual ferment of the Renaissance. Mehmed II thus inadvertently accelerated the very intellectual revolution he had sought to end. History rarely works as planned.</p>`
+  },
+  austerlitz: {
+    date: "December 2, 1805",
+    title: "Battle of Austerlitz",
+    content: `<p>Widely considered Napoleon's greatest victory and one of the most perfectly fought battles in military history. The "Battle of the Three Emperors" — Napoleon vs. Russian Emperor Alexander I and Austrian Emperor Francis II — was decided in under nine hours.</p>
+    <h4>The Masterpiece</h4>
+    <ul>
+      <li>Napoleon deliberately weakened his right flank to draw the Allied attack there</li>
+      <li>When the Allies sent troops to outflank his right, they abandoned the high ground (Pratzen Heights)</li>
+      <li>Napoleon immediately sent his main force to capture the Heights — splitting the Allied army</li>
+      <li>The Allied left was driven into frozen ponds; thousands drowned as Napoleon's artillery broke the ice</li>
+      <li>Allied casualties: ~36,000; French: ~9,000</li>
+    </ul>
+    <h4>Aftermath</h4>
+    <p>Austerlitz effectively ended the Third Coalition against France. Austria sued for peace, ceding territory and paying indemnities. Napoleon was at the absolute apex of his power. He would never be this close to permanent European supremacy again.</p>`
+  },
+  waterloo: {
+    date: "June 18, 1815",
+    title: "Battle of Waterloo",
+    content: `<p>The battle that ended Napoleon's final comeback and established a century of relative European peace. Wellington's Anglo-Dutch force held Napoleon's attacks throughout the afternoon until Prussian reinforcements arrived to tip the balance.</p>
+    <h4>The Battle</h4>
+    <ul>
+      <li>Napoleon needed to defeat Wellington before the Prussians arrived — he attacked at midday</li>
+      <li>Wellington chose a reverse-slope position, hiding his infantry until the last moment</li>
+      <li>Marshal Ney launched premature cavalry charges against unbroken infantry squares</li>
+      <li>The Imperial Guard's final attack was repulsed for the first time in history</li>
+      <li>The arrival of Blücher's Prussians turned the French retreat into a rout</li>
+    </ul>
+    <h4>Legacy</h4>
+    <p>Waterloo entered the language as a metaphor for decisive defeat. The Congress of Vienna, meeting as the battle was fought, established a balance of power that kept Europe relatively peaceful for 100 years — until the guns of August 1914.</p>`
+  }
+};
+
+// ===== MODAL FUNCTIONALITY =====
+function openModal(id) {
+  const data = modalData[id];
+  if (!data) return;
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-date">${data.date}</div>
+    <div class="modal-title">${data.title}</div>
+    <div class="modal-content">${data.content}</div>
+  `;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal')) {
+    document.getElementById('modal').classList.remove('open');
+  }
+}
+
+// Add click handlers to timeline items
+document.querySelectorAll('.timeline-item[data-modal]').forEach(item => {
+  item.querySelector('.timeline-content').addEventListener('click', function() {
+    openModal(item.dataset.modal);
+  });
+  item.querySelector('.timeline-content').style.cursor = 'pointer';
+});
+
+// ===== SITE CARD TOGGLE =====
+function toggleCard(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+// ===== FILTER FUNCTIONALITY =====
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    const filter = this.dataset.filter;
+    document.querySelectorAll('.timeline-item:not(.era-marker)').forEach(item => {
+      if (filter === 'all' || item.dataset.cat === filter) {
+        item.style.display = 'flex';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+// ===== WHAT ELSE WAS HAPPENING =====
+document.querySelectorAll('.date-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.date-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    document.querySelectorAll('.wewh-display').forEach(d => d.classList.remove('active'));
+    const target = document.getElementById('wewh-' + this.dataset.period);
+    if (target) target.classList.add('active');
+  });
+});
+
+// ===== ZOOM CONTROLS =====
+let zoomLevel = 1;
+document.getElementById('zoomIn').addEventListener('click', function() {
+  zoomLevel = Math.min(zoomLevel + 0.15, 1.5);
+  document.getElementById('timelineWrapper').style.fontSize = zoomLevel + 'em';
+});
+document.getElementById('zoomOut').addEventListener('click', function() {
+  zoomLevel = Math.max(zoomLevel - 0.15, 0.7);
+  document.getElementById('timelineWrapper').style.fontSize = zoomLevel + 'em';
+});
+
+// ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.timeline-item').forEach(item => {
+  observer.observe(item);
+});
+
+// ===== SEARCH =====
+const searchData = [
+  { term: 'alexander', text: 'Alexander the Great — Historical Figure', section: '#figures' },
+  { term: 'hannibal', text: 'Hannibal — Historical Figure', section: '#figures' },
+  { term: 'napoleon', text: 'Napoleon Bonaparte — Historical Figure', section: '#figures' },
+  { term: 'julius caesar', text: 'Julius Caesar — Historical Figure', section: '#figures' },
+  { term: 'caesar', text: 'Julius Caesar — Historical Figure', section: '#figures' },
+  { term: 'gobekli', text: 'Göbekli Tepe — First Temples Section', section: '#first-temples' },
+  { term: 'göbekli', text: 'Göbekli Tepe — First Temples Section', section: '#first-temples' },
+  { term: 'karahan', text: 'Karahan Tepe — First Temples Section', section: '#first-temples' },
+  { term: 'cannae', text: 'Battle of Cannae — Battles Section', section: '#battles' },
+  { term: 'marathon', text: 'Battle of Marathon — Battles Section', section: '#battles' },
+  { term: 'thermopylae', text: 'Battle of Thermopylae — Battles Section', section: '#battles' },
+  { term: 'waterloo', text: 'Battle of Waterloo — Battles Section', section: '#battles' },
+  { term: 'stalingrad', text: 'Battle of Stalingrad — Battles Section', section: '#battles' },
+  { term: 'egypt', text: 'Ancient Egypt — Civilizations Section', section: '#civilizations' },
+  { term: 'rome', text: 'Roman Empire — Civilizations Section', section: '#civilizations' },
+  { term: 'rome', text: 'Roman Empire — Civilizations Section', section: '#civilizations' },
+  { term: 'mongol', text: 'Mongol Empire — Civilizations Section', section: '#civilizations' },
+  { term: 'amazon', text: 'Amazon Discoveries — Americas Section', section: '#americas' },
+  { term: 'lidar', text: 'LiDAR Discoveries — Americas & Discoveries Sections', section: '#americas' },
+  { term: 'cahokia', text: 'Cahokia — North America Section', section: '#americas' },
+  { term: 'dna', text: 'Ancient DNA Revolution — Discoveries Section', section: '#discoveries' },
+  { term: 'maya', text: 'Maya Cities via LiDAR — Discoveries Section', section: '#discoveries' },
+  { term: 'sumer', text: 'Sumer — Civilizations Section', section: '#civilizations' },
+  { term: 'indus', text: 'Indus Valley Civilization — Civilizations Section', section: '#civilizations' },
+  { term: 'viking', text: 'Vikings — Civilizations Section', section: '#civilizations' },
+  { term: 'saladin', text: 'Saladin — Historical Figures Section', section: '#figures' },
+  { term: 'genghis', text: 'Genghis Khan — Historical Figures Section', section: '#figures' },
+  { term: 'rommel', text: 'Erwin Rommel — Historical Figures Section', section: '#figures' },
+  { term: 'zhukov', text: 'Georgy Zhukov — Historical Figures Section', section: '#figures' },
+  { term: 'austerlitz', text: 'Battle of Austerlitz — Battles Section', section: '#battles' },
+];
+
+document.getElementById('searchInput').addEventListener('input', function() {
+  const query = this.value.toLowerCase().trim();
+  const bar = document.getElementById('searchBar');
+  const content = document.getElementById('searchResultsContent');
+
+  if (query.length < 2) {
+    bar.classList.remove('open');
+    return;
+  }
+
+  const results = searchData.filter(d => d.term.includes(query) || query.includes(d.term.split(' ')[0]));
+  const unique = [...new Map(results.map(r => [r.text, r])).values()].slice(0, 8);
+
+  if (unique.length === 0) {
+    bar.classList.remove('open');
+    return;
+  }
+
+  content.innerHTML = unique.map(r =>
+    `<span class="search-result-item" onclick="navigateTo('${r.section}'); document.getElementById('searchBar').classList.remove('open'); document.getElementById('searchInput').value=''">${r.text}</span>`
+  ).join('');
+
+  bar.classList.add('open');
+});
+
+document.getElementById('searchClose').addEventListener('click', function() {
+  document.getElementById('searchBar').classList.remove('open');
+  document.getElementById('searchInput').value = '';
+});
+
+function navigateTo(hash) {
+  const el = document.querySelector(hash);
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+// ESC key closes modal and search
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('searchBar').classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
